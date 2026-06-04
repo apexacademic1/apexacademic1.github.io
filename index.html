@@ -3,571 +3,256 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apex Academic Online Tutoring for Grades 7–12</title>
+<title>Apex Academic — Online Tutoring for Grades 7–12</title>
 <meta name="description" content="Apex Academic connects K–12 students with rigorously vetted tutors for personalized online instruction in math, science, English, and test prep.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-/* ============================================================
-   RESET & BASE
-============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #f8f6f1;
-  color: #1c1c2e;
-  font-size: 15px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#f8f6f1;color:#1c1c2e;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+:root{
+  --navy:#0f2240;--navy2:#1a3560;--navy3:#09182e;
+  --gold:#b8934a;--gold-lt:#e8d5a3;--gold-bg:#fdf6e9;--gold-bdr:#e6d4a0;
+  --cream:#f8f6f1;--white:#ffffff;--text:#1c1c2e;--muted:#636578;--border:#e4e0d8;
+  --green:#1a6b4a;--green-bg:#edf7f2;--green-bdr:#b8deca;
+  --radius:11px;--shadow:0 2px 16px rgba(15,34,64,.08);--shadow-lg:0 8px 40px rgba(15,34,64,.14)
 }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-button { font-family: inherit; cursor: pointer; }
-
-/* ============================================================
-   DESIGN TOKENS
-============================================================ */
-:root {
-  --navy:      #0f2240;
-  --navy2:     #1a3560;
-  --navy3:     #09182e;
-  --gold:      #b8934a;
-  --gold-lt:   #e8d5a3;
-  --gold-bg:   #fdf6e9;
-  --gold-bdr:  #e6d4a0;
-  --cream:     #f8f6f1;
-  --white:     #ffffff;
-  --text:      #1c1c2e;
-  --muted:     #636578;
-  --border:    #e4e0d8;
-  --green:     #1a6b4a;
-  --green-bg:  #edf7f2;
-  --green-bdr: #b8deca;
-  --red:       #c0392b;
-  --radius:    11px;
-  --shadow:    0 2px 16px rgba(15,34,64,.08);
-  --shadow-lg: 0 8px 40px rgba(15,34,64,.14);
-}
-
-/* ============================================================
-   TYPOGRAPHY HELPERS
-============================================================ */
-.serif { font-family: 'DM Serif Display', serif; }
-.tag-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--gold);
-  display: block; margin-bottom: 10px;
-}
-.tag-label.light { color: var(--gold-lt); }
-.section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 34px; line-height: 1.18; color: var(--navy);
-  margin-bottom: 13px;
-}
-.section-title.light { color: #fff; }
-.section-sub {
-  color: var(--muted); font-size: 15px; line-height: 1.75;
-  max-width: 500px;
-}
-.section-sub.light { color: rgba(255,255,255,.6); }
-
-/* ============================================================
-   LAYOUT
-============================================================ */
-.container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
-.section { padding: 68px 0; }
-.section.white { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.section.dark { background: var(--navy); }
-.section.gold-bg { background: var(--gold-bg); border-top: 1px solid var(--gold-bdr); border-bottom: 1px solid var(--gold-bdr); }
-.section.cream { background: var(--cream); }
-
-/* ============================================================
-   BUTTONS
-============================================================ */
-.btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 13px 24px; border-radius: 7px;
-  font-size: 14px; font-weight: 600; border: none;
-  cursor: pointer; transition: all .18s ease; white-space: nowrap;
-}
-.btn-gold { background: var(--gold); color: #fff; }
-.btn-gold:hover { background: #a37c3c; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,147,74,.35); }
-.btn-navy { background: var(--navy); color: #fff; }
-.btn-navy:hover { background: var(--navy2); transform: translateY(-1px); }
-.btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.28); }
-.btn-ghost:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
-.btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
-.btn-outline:hover { background: var(--navy); color: #fff; }
-.btn-lg { padding: 15px 30px; font-size: 15px; }
-.btn-full { width: 100%; justify-content: center; }
-
-/* ============================================================
-   NAV
-============================================================ */
-.nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--white); border-bottom: 1px solid var(--border);
-  height: 62px; display: flex; align-items: center;
-  box-shadow: 0 1px 12px rgba(0,0,0,.05);
-}
-.nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-.nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); }
-.nav-logo span { color: var(--gold); }
-.nav-links { display: flex; align-items: center; gap: 26px; }
-.nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color .15s; }
-.nav-links a:hover { color: var(--navy); }
-.nav-cta { background: var(--navy); color: #fff !important; padding: 8px 18px; border-radius: 6px; }
-.nav-cta:hover { background: var(--navy2) !important; }
-.nav-mobile-btn { display: none; background: none; border: none; font-size: 22px; color: var(--navy); cursor: pointer; }
-.mobile-menu {
-  display: none; position: fixed; top: 62px; left: 0; right: 0; bottom: 0;
-  background: var(--white); z-index: 99; padding: 28px 28px; flex-direction: column; gap: 20px;
-  border-top: 1px solid var(--border);
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a { font-size: 17px; font-weight: 500; color: var(--navy); padding: 8px 0; border-bottom: 1px solid var(--border); }
-.mobile-menu .btn { margin-top: 8px; text-align: center; }
-
-/* ============================================================
-   OFFER STRIP
-============================================================ */
-.offer-strip {
-  background: var(--green-bg);
-  border-bottom: 1px solid var(--green-bdr);
-  padding: 13px 40px;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-}
-.offer-strip-text { font-size: 13px; font-weight: 500; color: var(--green); display: flex; align-items: center; gap: 8px; }
-.offer-strip-text i { font-size: 16px; }
-.offer-strip-cta {
-  background: var(--green); color: #fff; padding: 7px 16px; border-radius: 6px;
-  font-size: 12px; font-weight: 600; white-space: nowrap;
-}
-
-/* ============================================================
-   HERO
-============================================================ */
-.hero {
-  background: var(--navy);
-  padding: 80px 0 72px;
-  position: relative; overflow: hidden;
-}
-.hero-ring {
-  position: absolute; top: -90px; right: -120px;
-  width: 420px; height: 420px; border-radius: 50%;
-  border: 52px solid rgba(184,147,74,.09); pointer-events: none;
-}
-.hero-ring2 {
-  position: absolute; bottom: -60px; right: 60px;
-  width: 200px; height: 200px; border-radius: 50%;
-  border: 28px solid rgba(184,147,74,.06); pointer-events: none;
-}
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(184,147,74,.2); color: var(--gold-lt);
-  font-size: 11px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase;
-  padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
-}
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 48px; line-height: 1.12; color: #fff;
-  max-width: 580px; margin-bottom: 20px;
-}
-.hero h1 em { color: var(--gold); font-style: normal; }
-.hero-sub {
-  color: rgba(255,255,255,.68); font-size: 16px; line-height: 1.78;
-  max-width: 480px; margin-bottom: 36px;
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 22px; }
-.hero-note { font-size: 12px; color: rgba(255,255,255,.38); display: flex; align-items: center; gap: 6px; }
-.hero-note i { font-size: 14px; }
-
-/* ============================================================
-   PROOF BAR
-============================================================ */
-.proof-bar {
-  background: var(--white); border-bottom: 1px solid var(--border);
-  padding: 16px 0;
-}
-.proof-bar .container { display: flex; gap: 32px; flex-wrap: wrap; }
-.proof-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--muted); }
-.proof-item i { font-size: 16px; color: var(--gold); flex-shrink: 0; }
-
-/* ============================================================
-   HOW IT WORKS
-============================================================ */
-.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
-.step-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 30px 26px; position: relative;
-  transition: box-shadow .2s;
-}
-.step-card:hover { box-shadow: var(--shadow); }
-.step-number {
-  font-family: 'DM Serif Display', serif; font-size: 44px;
-  color: var(--gold-bdr); position: absolute; top: 16px; right: 20px; line-height: 1;
-}
-.step-card h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-.step-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-/* ============================================================
-   INCLUDED
-============================================================ */
-.included-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
-.inc-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px 22px;
-  display: flex; gap: 16px; align-items: flex-start;
-  transition: box-shadow .2s;
-}
-.inc-card:hover { box-shadow: var(--shadow); }
-.inc-icon {
-  width: 40px; height: 40px; background: var(--gold-bg);
-  border: 1px solid var(--gold-bdr); border-radius: 9px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.inc-icon i { font-size: 19px; color: var(--gold); }
-.inc-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
-.inc-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-/* ============================================================
-   SUBJECTS
-============================================================ */
-.subjects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 36px; }
-.subj-card {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
-  border-radius: 10px; padding: 18px 20px;
-  transition: background .2s;
-}
-.subj-card:hover { background: rgba(255,255,255,.09); }
-.subj-dot { width: 9px; height: 9px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-.subj-card h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
-.subj-card p { font-size: 12px; color: rgba(255,255,255,.5); }
-.subjects-note { margin-top: 22px; text-align: center; font-size: 12px; color: rgba(255,255,255,.3); font-style: italic; }
-
-/* ============================================================
-   TUTOR SCREENING
-============================================================ */
-.screen-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
-.screen-stat {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px 20px; text-align: center;
-}
-.screen-stat-num {
-  font-family: 'DM Serif Display', serif; font-size: 36px;
-  color: var(--navy); margin-bottom: 4px;
-}
-.screen-stat-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
-.screen-stat-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
-.screen-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
-.screen-step {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: var(--gold-bg); border: 1px solid var(--gold-bdr);
-  border-radius: 10px; padding: 16px 18px;
-}
-.screen-step-num {
-  width: 26px; height: 26px; background: var(--gold); color: #fff;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
-}
-.screen-step h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
-.screen-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
-
-/* ============================================================
-   PRICING
-============================================================ */
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-.price-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 24px; position: relative;
-  display: flex; flex-direction: column;
-  transition: box-shadow .2s;
-}
-.price-card:hover { box-shadow: var(--shadow); }
-.price-card.featured { border: 2px solid var(--navy); }
-.price-badge {
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: var(--navy); color: #fff; font-size: 10px; font-weight: 700;
-  letter-spacing: .8px; text-transform: uppercase; padding: 4px 16px; border-radius: 20px; white-space: nowrap;
-}
-.price-tier { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-.price-amount {
-  font-family: 'DM Serif Display', serif; font-size: 40px;
-  color: var(--navy); line-height: 1; margin-bottom: 4px;
-}
-.price-amount span { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--muted); }
-.price-save {
-  display: inline-block; background: var(--green-bg); color: var(--green);
-  font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 5px;
-  margin-bottom: 14px;
-}
-.price-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.65;
-  padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 18px;
-}
-.price-features { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; flex: 1; }
-.price-feat { display: flex; align-items: flex-start; gap: 9px; font-size: 12px; color: var(--muted); }
-.price-feat i { font-size: 14px; color: var(--gold); margin-top: 1px; flex-shrink: 0; }
-.price-card .btn { margin-top: auto; }
-
-/* ============================================================
-   TESTIMONIALS
-============================================================ */
-.testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 36px; }
-.testi-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 24px;
-}
-.testi-stars { color: var(--gold); letter-spacing: 2px; font-size: 14px; margin-bottom: 14px; }
-.testi-card blockquote { font-size: 14px; color: var(--text); line-height: 1.78; margin-bottom: 16px; font-style: italic; }
-.testi-author { font-size: 13px; font-weight: 600; color: var(--navy); }
-.testi-role { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-.testi-result {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--green-bg); color: var(--green);
-  font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 5px;
-}
-.testi-result i { font-size: 13px; }
-
-/* ============================================================
-   TEST PREP BANNER
-============================================================ */
-.testprep-banner {
-  display: grid; grid-template-columns: 1fr auto; gap: 48px;
-  align-items: center;
-}
-.testprep-stats { display: flex; flex-direction: column; gap: 13px; }
-.testprep-stat {
-  background: var(--white); border: 1px solid var(--gold-bdr);
-  border-radius: 10px; padding: 16px 24px; text-align: center; min-width: 150px;
-}
-.testprep-stat-num {
-  font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1;
-}
-.testprep-stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-/* ============================================================
-   FINAL CTA
-============================================================ */
-.final-cta { background: var(--navy); padding: 80px 0; text-align: center; }
-.final-cta h2 { font-family: 'DM Serif Display', serif; font-size: 40px; color: #fff; margin-bottom: 14px; }
-.final-cta p { color: rgba(255,255,255,.62); font-size: 15px; max-width: 440px; margin: 0 auto 32px; }
-.cta-offer-boxes {
-  display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;
-}
-.cta-offer-box {
-  border: 1px solid rgba(255,255,255,.14); border-radius: 9px;
-  padding: 14px 22px; text-align: center; min-width: 160px;
-}
-.cta-offer-box.highlight { border-color: var(--gold); background: rgba(184,147,74,.13); }
-.cta-offer-box-label { font-size: 11px; color: rgba(255,255,255,.38); margin-bottom: 5px; }
-.cta-offer-box-val { font-size: 13px; font-weight: 600; color: #fff; }
-.cta-offer-box.highlight .cta-offer-box-val { color: var(--gold); }
-.final-cta-note { font-size: 12px; color: rgba(255,255,255,.28); margin-top: 16px; }
-
-/* ============================================================
-   PAGE SECTIONS (multi-page via JS tabs)
-============================================================ */
-.page { display: none; }
-.page.active { display: block; }
-
-/* ============================================================
-   ABOUT PAGE
-============================================================ */
-.about-hero { background: var(--navy); padding: 72px 0 64px; }
-.about-hero h1 { font-family: 'DM Serif Display', serif; font-size: 42px; color: #fff; margin-bottom: 16px; max-width: 560px; }
-.about-hero p { color: rgba(255,255,255,.65); font-size: 16px; line-height: 1.78; max-width: 520px; }
-.about-content { padding: 64px 0; }
-.about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 56px; align-items: start; }
-.about-body p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
-.about-body h3 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--navy); margin: 32px 0 12px; }
-.about-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.about-stat-card {
-  background: var(--gold-bg); border: 1px solid var(--gold-bdr);
-  border-radius: var(--radius); padding: 22px 20px; text-align: center;
-}
-.about-stat-card .num { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--navy); }
-.about-stat-card .label { font-size: 12px; color: var(--muted); margin-top: 3px; }
-.about-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-.value-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px 20px;
-}
-.value-card i { font-size: 22px; color: var(--gold); margin-bottom: 12px; display: block; }
-.value-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
-.value-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-/* ============================================================
-   SUBJECTS PAGE
-============================================================ */
-.subjects-page-hero { background: var(--navy); padding: 68px 0 56px; }
-.subjects-page-hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; color: #fff; margin-bottom: 14px; }
-.subjects-page-hero p { color: rgba(255,255,255,.62); font-size: 15px; max-width: 480px; line-height: 1.75; }
-.subject-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 44px; }
-.subject-full-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 26px;
-}
-.subject-full-card .subj-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-.subject-full-card .subj-icon {
-  width: 44px; height: 44px; background: var(--gold-bg); border: 1px solid var(--gold-bdr);
-  border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.subject-full-card .subj-icon i { font-size: 20px; color: var(--gold); }
-.subject-full-card h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
-.subject-full-card .grade-tag {
-  font-size: 11px; background: var(--cream); border: 1px solid var(--border);
-  color: var(--muted); padding: 2px 9px; border-radius: 5px; display: inline-block;
-}
-.subject-full-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
-.subject-full-card ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.subject-full-card ul li { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--muted); }
-.subject-full-card ul li i { font-size: 13px; color: var(--gold); margin-top: 1px; flex-shrink: 0; }
-
-/* ============================================================
-   PRICING PAGE
-============================================================ */
-.pricing-page-hero { background: var(--navy); padding: 68px 0 56px; }
-.pricing-page-hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; color: #fff; margin-bottom: 14px; }
-.pricing-page-hero p { color: rgba(255,255,255,.62); font-size: 15px; max-width: 480px; line-height: 1.75; }
-.pricing-full-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
-.faq-section { padding: 56px 0; }
-.faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
-.faq-item {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 10px; padding: 20px 20px;
-}
-.faq-item h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-.faq-item p { font-size: 13px; color: var(--muted); line-height: 1.65; }
-.cancellation-box {
-  background: var(--gold-bg); border: 1px solid var(--gold-bdr);
-  border-radius: var(--radius); padding: 28px 26px; margin-top: 44px;
-}
-.cancellation-box h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 14px; }
-.cancellation-box p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
-
-/* ============================================================
-   CONTACT PAGE
-============================================================ */
-.contact-hero { background: var(--navy); padding: 68px 0 56px; }
-.contact-hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; color: #fff; margin-bottom: 14px; }
-.contact-hero p { color: rgba(255,255,255,.62); font-size: 15px; max-width: 460px; line-height: 1.75; }
-.contact-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 48px; margin-top: 52px; align-items: start; }
-.contact-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px 32px; }
-.contact-form h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 24px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.form-group label { font-size: 12px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: .5px; }
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 10px 14px; border: 1.5px solid var(--border);
-  border-radius: 7px; font-family: 'DM Sans', sans-serif;
-  font-size: 14px; color: var(--text); background: var(--cream);
-  transition: border-color .15s;
-  outline: none;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus { border-color: var(--navy); background: var(--white); }
-.form-group textarea { resize: vertical; min-height: 90px; }
-.checkbox-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-.checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-.checkbox-item input[type=checkbox] { accent-color: var(--navy); width: 15px; height: 15px; }
-.form-success {
-  display: none; background: var(--green-bg); border: 1px solid var(--green-bdr);
-  border-radius: 9px; padding: 20px; text-align: center; margin-top: 16px;
-}
-.form-success i { font-size: 28px; color: var(--green); margin-bottom: 8px; display: block; }
-.form-success p { font-size: 14px; color: var(--green); font-weight: 500; }
-.contact-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.contact-info-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 22px 20px;
-}
-.contact-info-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
-.contact-info-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-.contact-info-card i { font-size: 18px; color: var(--gold); margin-bottom: 10px; display: block; }
-.trust-list { display: flex; flex-direction: column; gap: 9px; margin-top: 14px; }
-.trust-list-item { display: flex; align-items: flex-start; gap: 9px; font-size: 12px; color: var(--muted); }
-.trust-list-item i { font-size: 14px; color: var(--gold); margin-top: 1px; flex-shrink: 0; }
-
-/* ============================================================
-   FOOTER
-============================================================ */
-footer {
-  background: var(--navy3); padding: 36px 0 28px;
-}
-.footer-inner {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px;
-  margin-bottom: 32px;
-}
-.footer-brand { font-family: 'DM Serif Display', serif; font-size: 18px; color: #fff; margin-bottom: 10px; }
-.footer-brand span { color: var(--gold); }
-.footer-tagline { font-size: 12px; color: rgba(255,255,255,.35); line-height: 1.6; max-width: 220px; }
-.footer-col h5 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 14px; }
-.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,.5); margin-bottom: 9px; transition: color .15s; }
-.footer-col a:hover { color: rgba(255,255,255,.85); }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,.08); padding-top: 22px;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-}
-.footer-copy { font-size: 12px; color: rgba(255,255,255,.25); }
-.footer-legal { display: flex; gap: 18px; }
-.footer-legal a { font-size: 12px; color: rgba(255,255,255,.28); }
-.footer-legal a:hover { color: rgba(255,255,255,.55); }
-
-/* ============================================================
-   ANIMATIONS
-============================================================ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.fade-up { opacity: 0; animation: fadeUp .55s ease forwards; }
-.fade-up-1 { animation-delay: .05s; }
-.fade-up-2 { animation-delay: .15s; }
-.fade-up-3 { animation-delay: .25s; }
-.fade-up-4 { animation-delay: .35s; }
-
-/* ============================================================
-   RESPONSIVE
-============================================================ */
-@media (max-width: 860px) {
-  .nav-links { display: none; }
-  .nav-mobile-btn { display: block; }
-  .hero h1 { font-size: 34px; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .included-grid { grid-template-columns: 1fr; }
-  .subjects-grid { grid-template-columns: 1fr; }
-  .screen-stats { grid-template-columns: 1fr 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .testprep-banner { grid-template-columns: 1fr; }
-  .testprep-stats { flex-direction: row; flex-wrap: wrap; }
-  .footer-inner { grid-template-columns: 1fr 1fr; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-values { grid-template-columns: 1fr; }
-  .subject-cards { grid-template-columns: 1fr; }
-  .pricing-full-grid { grid-template-columns: 1fr; }
-  .faq-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .cta-offer-boxes { flex-direction: column; align-items: center; }
-  .offer-strip { flex-direction: column; text-align: center; }
-  .container { padding: 0 20px; }
-  .section { padding: 48px 0; }
+.serif{font-family:'DM Serif Display',serif}
+.tag-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.tag-label.light{color:var(--gold-lt)}
+.section-title{font-family:'DM Serif Display',serif;font-size:34px;line-height:1.18;color:var(--navy);margin-bottom:13px}
+.section-title.light{color:#fff}
+.section-sub{color:var(--muted);font-size:15px;line-height:1.75;max-width:500px}
+.section-sub.light{color:rgba(255,255,255,.6)}
+.container{max-width:1080px;margin:0 auto;padding:0 40px}
+.section{padding:68px 0}
+.section.white{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section.dark{background:var(--navy)}
+.section.gold-bg{background:var(--gold-bg);border-top:1px solid var(--gold-bdr);border-bottom:1px solid var(--gold-bdr)}
+.section.cream{background:var(--cream)}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:13px 24px;border-radius:7px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s ease;white-space:nowrap}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#a37c3c;transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,147,74,.35)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.28)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.07)}
+.btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-outline:hover{background:var(--navy);color:#fff}
+.btn-lg{padding:15px 30px;font-size:15px}
+.btn-full{width:100%;justify-content:center}
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;box-shadow:0 1px 12px rgba(0,0,0,.05)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff !important;padding:8px 18px;border-radius:6px}
+.nav-cta:hover{background:var(--navy2) !important}
+.nav-mobile-btn{display:none;background:none;border:none;font-size:22px;color:var(--navy);cursor:pointer}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;background:var(--white);z-index:99;padding:28px;flex-direction:column;gap:20px;border-top:1px solid var(--border)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:17px;font-weight:500;color:var(--navy);padding:8px 0;border-bottom:1px solid var(--border)}
+.mobile-menu .btn{margin-top:8px;text-align:center}
+.offer-strip{background:var(--green-bg);border-bottom:1px solid var(--green-bdr);padding:13px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.offer-strip-text{font-size:13px;font-weight:500;color:var(--green);display:flex;align-items:center;gap:8px}
+.offer-strip-text i{font-size:16px}
+.offer-strip-cta{background:var(--green);color:#fff;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.hero{background:var(--navy);padding:80px 0 72px;position:relative;overflow:hidden}
+.hero-ring{position:absolute;top:-90px;right:-120px;width:420px;height:420px;border-radius:50%;border:52px solid rgba(184,147,74,.09);pointer-events:none}
+.hero-ring2{position:absolute;bottom:-60px;right:60px;width:200px;height:200px;border-radius:50%;border:28px solid rgba(184,147,74,.06);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(184,147,74,.2);color:var(--gold-lt);font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:48px;line-height:1.12;color:#fff;max-width:580px;margin-bottom:20px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.68);font-size:16px;line-height:1.78;max-width:480px;margin-bottom:36px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.hero-note{font-size:12px;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:6px}
+.hero-note i{font-size:14px}
+.proof-bar{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0}
+.proof-bar .container{display:flex;gap:32px;flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--muted)}
+.proof-item i{font-size:16px;color:var(--gold);flex-shrink:0}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.step-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;position:relative;transition:box-shadow .2s}
+.step-card:hover{box-shadow:var(--shadow)}
+.step-number{font-family:'DM Serif Display',serif;font-size:44px;color:var(--gold-bdr);position:absolute;top:16px;right:20px;line-height:1}
+.step-card h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.step-card p{font-size:13px;color:var(--muted);line-height:1.7}
+.included-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.inc-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 22px;display:flex;gap:16px;align-items:flex-start;transition:box-shadow .2s}
+.inc-card:hover{box-shadow:var(--shadow)}
+.inc-icon{width:40px;height:40px;background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.inc-icon i{font-size:19px;color:var(--gold)}
+.inc-card h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px}
+.inc-card p{font-size:13px;color:var(--muted);line-height:1.65}
+.subjects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:36px}
+.subj-card{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:18px 20px;transition:background .2s}
+.subj-card:hover{background:rgba(255,255,255,.09)}
+.subj-dot{width:9px;height:9px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:4px}
+.subj-card h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.subj-card p{font-size:12px;color:rgba(255,255,255,.5)}
+.subjects-note{margin-top:22px;text-align:center;font-size:12px;color:rgba(255,255,255,.3);font-style:italic}
+.screen-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}
+.screen-stat{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center}
+.screen-stat-num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--navy);margin-bottom:4px}
+.screen-stat-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.screen-stat-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.screen-steps{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.screen-step{display:flex;align-items:flex-start;gap:14px;background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:10px;padding:16px 18px}
+.screen-step-num{width:26px;height:26px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.screen-step h4{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.screen-step p{font-size:12px;color:var(--muted);line-height:1.6}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;position:relative;display:flex;flex-direction:column;transition:box-shadow .2s}
+.price-card:hover{box-shadow:var(--shadow)}
+.price-card.featured{border:2px solid var(--navy)}
+.price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.price-tier{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.price-amount{font-family:'DM Serif Display',serif;font-size:40px;color:var(--navy);line-height:1;margin-bottom:4px}
+.price-amount span{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:var(--muted)}
+.price-save{display:inline-block;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:600;padding:3px 10px;border-radius:5px;margin-bottom:14px}
+.price-desc{font-size:13px;color:var(--muted);line-height:1.65;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.price-features{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;flex:1}
+.price-feat{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted)}
+.price-feat i{font-size:14px;color:var(--gold);margin-top:1px;flex-shrink:0}
+.price-card .btn{margin-top:auto}
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:36px}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px}
+.testi-stars{color:var(--gold);letter-spacing:2px;font-size:14px;margin-bottom:14px}
+.testi-card blockquote{font-size:14px;color:var(--text);line-height:1.78;margin-bottom:16px;font-style:italic}
+.testi-author{font-size:13px;font-weight:600;color:var(--navy)}
+.testi-role{font-size:12px;color:var(--muted);margin-bottom:12px}
+.testi-result{display:inline-flex;align-items:center;gap:6px;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:600;padding:4px 11px;border-radius:5px}
+.testi-result i{font-size:13px}
+.testprep-banner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+.testprep-stats{display:flex;flex-direction:column;gap:13px}
+.testprep-stat{background:var(--white);border:1px solid var(--gold-bdr);border-radius:10px;padding:16px 24px;text-align:center;min-width:150px}
+.testprep-stat-num{font-family:'DM Serif Display',serif;font-size:30px;color:var(--navy);line-height:1}
+.testprep-stat-label{font-size:11px;color:var(--muted);margin-top:3px}
+.final-cta{background:var(--navy);padding:80px 0;text-align:center}
+.final-cta h2{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:14px}
+.final-cta p{color:rgba(255,255,255,.62);font-size:15px;max-width:440px;margin:0 auto 32px}
+.cta-offer-boxes{display:flex;justify-content:center;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.cta-offer-box{border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:14px 22px;text-align:center;min-width:160px}
+.cta-offer-box.highlight{border-color:var(--gold);background:rgba(184,147,74,.13)}
+.cta-offer-box-label{font-size:11px;color:rgba(255,255,255,.38);margin-bottom:5px}
+.cta-offer-box-val{font-size:13px;font-weight:600;color:#fff}
+.cta-offer-box.highlight .cta-offer-box-val{color:var(--gold)}
+.final-cta-note{font-size:12px;color:rgba(255,255,255,.28);margin-top:16px}
+.page{display:none}
+.page.active{display:block}
+.about-hero{background:var(--navy);padding:72px 0 64px}
+.about-hero h1{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;margin-bottom:16px;max-width:560px}
+.about-hero p{color:rgba(255,255,255,.65);font-size:16px;line-height:1.78;max-width:520px}
+.about-content{padding:64px 0}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:56px;align-items:start}
+.about-body p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:18px}
+.about-body h3{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);margin:32px 0 12px}
+.about-sidebar{display:flex;flex-direction:column;gap:16px}
+.about-stat-card{background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:var(--radius);padding:22px 20px;text-align:center}
+.about-stat-card .num{font-family:'DM Serif Display',serif;font-size:34px;color:var(--navy)}
+.about-stat-card .label{font-size:12px;color:var(--muted);margin-top:3px}
+.about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.value-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px}
+.value-card i{font-size:22px;color:var(--gold);margin-bottom:12px;display:block}
+.value-card h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:7px}
+.value-card p{font-size:13px;color:var(--muted);line-height:1.65}
+.subjects-page-hero{background:var(--navy);padding:68px 0 56px}
+.subjects-page-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:14px}
+.subjects-page-hero p{color:rgba(255,255,255,.62);font-size:15px;max-width:480px;line-height:1.75}
+.subject-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px}
+.subject-full-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 26px}
+.subject-full-card .subj-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.subject-full-card .subj-icon{width:44px;height:44px;background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.subject-full-card .subj-icon i{font-size:20px;color:var(--gold)}
+.subject-full-card h3{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.subject-full-card .grade-tag{font-size:11px;background:var(--cream);border:1px solid var(--border);color:var(--muted);padding:2px 9px;border-radius:5px;display:inline-block}
+.subject-full-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.subject-full-card ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.subject-full-card ul li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted)}
+.subject-full-card ul li i{font-size:13px;color:var(--gold);margin-top:1px;flex-shrink:0}
+.pricing-page-hero{background:var(--navy);padding:68px 0 56px}
+.pricing-page-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:14px}
+.pricing-page-hero p{color:rgba(255,255,255,.62);font-size:15px;max-width:480px;line-height:1.75}
+.pricing-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.faq-section{padding:56px 0}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px}
+.faq-item h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.faq-item p{font-size:13px;color:var(--muted);line-height:1.65}
+.cancellation-box{background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:var(--radius);padding:28px 26px;margin-top:44px}
+.cancellation-box h3{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:14px}
+.cancellation-box p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.contact-hero{background:var(--navy);padding:68px 0 56px}
+.contact-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:14px}
+.contact-hero p{color:rgba(255,255,255,.62);font-size:15px;max-width:460px;line-height:1.75}
+.contact-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;margin-top:52px;align-items:start}
+.contact-form{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:36px 32px}
+.contact-form h3{font-size:18px;font-weight:600;color:var(--navy);margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:12px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);transition:border-color .15s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--navy);background:var(--white)}
+.form-group textarea{resize:vertical;min-height:90px}
+.checkbox-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.checkbox-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.checkbox-item input[type=checkbox]{accent-color:var(--navy);width:15px;height:15px}
+.form-success{display:none;background:var(--green-bg);border:1px solid var(--green-bdr);border-radius:9px;padding:20px;text-align:center;margin-top:16px}
+.form-success i{font-size:28px;color:var(--green);margin-bottom:8px;display:block}
+.form-success p{font-size:14px;color:var(--green);font-weight:500}
+.contact-sidebar{display:flex;flex-direction:column;gap:16px}
+.contact-info-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px 20px}
+.contact-info-card h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px}
+.contact-info-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.contact-info-card i{font-size:18px;color:var(--gold);margin-bottom:10px;display:block}
+.trust-list{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.trust-list-item{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted)}
+.trust-list-item i{font-size:14px;color:var(--gold);margin-top:1px;flex-shrink:0}
+footer{background:var(--navy3);padding:36px 0 28px}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:18px;color:#fff;margin-bottom:10px}
+.footer-brand span{color:var(--gold)}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6;max-width:220px}
+.footer-col h5{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.5);margin-bottom:9px;transition:color .15s}
+.footer-col a:hover{color:rgba(255,255,255,.85)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+.footer-legal{display:flex;gap:18px}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.28)}
+.footer-legal a:hover{color:rgba(255,255,255,.55)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp .55s ease forwards}
+.fade-up-1{animation-delay:.05s}
+.fade-up-2{animation-delay:.15s}
+.fade-up-3{animation-delay:.25s}
+.fade-up-4{animation-delay:.35s}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .nav-mobile-btn{display:block}
+  .hero h1{font-size:34px}
+  .steps-grid,.included-grid,.subjects-grid,.pricing-grid,.testi-grid,.about-values,.subject-cards,.pricing-full-grid,.faq-grid{grid-template-columns:1fr}
+  .screen-stats{grid-template-columns:1fr 1fr}
+  .testprep-banner{grid-template-columns:1fr}
+  .testprep-stats{flex-direction:row;flex-wrap:wrap}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .about-grid,.contact-grid,.form-row{grid-template-columns:1fr}
+  .cta-offer-boxes{flex-direction:column;align-items:center}
+  .offer-strip{flex-direction:column;text-align:center}
+  .container{padding:0 20px}
+  .section{padding:48px 0}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     NAV
-============================================================ -->
 <nav class="nav">
   <div class="container">
     <a href="#" class="nav-logo" onclick="showPage('home')">Apex <span>Academic</span></a>
@@ -576,7 +261,7 @@ footer {
       <a href="#" onclick="showPage('subjects')">Subjects</a>
       <a href="#" onclick="showPage('pricing')">Pricing</a>
       <a href="#" onclick="showPage('about')">About</a>
-      <a href="#" onclick="showPage('contact')" class="nav-cta">Book Free Consult →</a>
+      <a href="#" onclick="showPage('contact')" class="nav-cta">Book Free Consult</a>
     </div>
     <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
       <i class="ti ti-menu-2"></i>
@@ -588,264 +273,117 @@ footer {
   <a href="#" onclick="showPage('subjects');closeMenu()">Subjects</a>
   <a href="#" onclick="showPage('pricing');closeMenu()">Pricing</a>
   <a href="#" onclick="showPage('about');closeMenu()">About</a>
-  <a href="#" onclick="showPage('contact');closeMenu()" class="btn btn-navy">Book Free Consult →</a>
+  <a href="#" onclick="showPage('contact');closeMenu()" class="btn btn-navy">Book Free Consult</a>
 </div>
 
-<!-- ============================================================
-     HOME PAGE
-============================================================ -->
 <div class="page active" id="page-home">
-
-  <!-- Offer strip -->
   <div class="offer-strip">
-    <div class="offer-strip-text">
-      <i class="ti ti-gift"></i>
-      Limited offer: First session free with any 4-session package no commitment, no risk.
-    </div>
-    <a href="#" class="offer-strip-cta" onclick="showPage('contact')">Claim Offer →</a>
+    <div class="offer-strip-text"><i class="ti ti-gift"></i> Limited offer: First session free with any 4-session package. No commitment, no risk.</div>
+    <a href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="offer-strip-cta" target="_blank">Claim Offer</a>
   </div>
-
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-ring"></div>
     <div class="hero-ring2"></div>
     <div class="container">
-      <div class="hero-eyebrow fade-up fade-up-1">
-        <i class="ti ti-school"></i> Online Tutoring · Grades 7–12 · U.S.-Wide
-      </div>
+      <div class="hero-eyebrow fade-up fade-up-1"><i class="ti ti-school"></i> Online Tutoring · Grades 7–12 · U.S.-Wide</div>
       <h1 class="fade-up fade-up-2">Stop Guessing Whether Your Student Is <em>Actually</em> Making Progress</h1>
-      <p class="hero-sub fade-up fade-up-3">Apex Academic is a managed tutoring company, not a marketplace. We screen every tutor, handle all matching, and send you written session notes after every lesson. You always know what's happening.</p>
+      <p class="hero-sub fade-up fade-up-3">Apex Academic is a managed tutoring company — not a marketplace. We screen every tutor, handle all matching, and send you written session notes after every lesson. You always know what's happening.</p>
       <div class="hero-actions fade-up fade-up-4">
-        <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free 15-Min Consultation →</a>
+        <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free 15-Min Consultation</a>
         <a href="#" class="btn btn-ghost" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See How It Works</a>
       </div>
-      <p class="hero-note fade-up">
-        <i class="ti ti-clock"></i> We respond within 24 hours · No commitment required
-      </p>
+      <p class="hero-note fade-up"><i class="ti ti-clock"></i> We respond within 24 hours · No commitment required</p>
     </div>
   </section>
-
-  <!-- Proof bar -->
   <div class="proof-bar">
     <div class="container">
-      <div class="proof-item"><i class="ti ti-clipboard-check"></i> Multi-step tutor screening interview + live sample lesson required</div>
+      <div class="proof-item"><i class="ti ti-clipboard-check"></i> Multi-step tutor screening — interview + live sample lesson required</div>
       <div class="proof-item"><i class="ti ti-notes"></i> Written session notes delivered to parents after every lesson</div>
       <div class="proof-item"><i class="ti ti-user-check"></i> Same dedicated tutor every week</div>
       <div class="proof-item"><i class="ti ti-shield-check"></i> Background-checked tutors</div>
     </div>
   </div>
-
-  <!-- How it works -->
   <section class="section white" id="how-it-works">
     <div class="container">
       <span class="tag-label">How It Works</span>
       <h2 class="section-title">From your first message to your student's first session in 48 hours</h2>
       <p class="section-sub">We handle matching, scheduling, and accountability. You don't browse tutors or manage anything.</p>
       <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-number">1</span>
-          <h3>Tell us what your student needs</h3>
-          <p>Fill out a 3-minute intake form with your student's grade, subject, and specific challenges. We read every submission personally.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">2</span>
-          <h3>We match you don't browse</h3>
-          <p>We review your form and assign the right tutor by subject mastery, grade-level experience, and schedule. You get an intro email with your tutor's credentials within 24–48 hours.</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">3</span>
-          <h3>Sessions start with full visibility</h3>
-          <p>Every session is confirmed in advance. Within 2 hours of each lesson, you receive a written summary: what was covered, what needs work, and what's planned next.</p>
-        </div>
+        <div class="step-card"><span class="step-number">1</span><h3>Tell us what your student needs</h3><p>Fill out a 3-minute intake form with your student's grade, subject, and specific challenges. We read every submission personally.</p></div>
+        <div class="step-card"><span class="step-number">2</span><h3>We match — you don't browse</h3><p>We review your form and assign the right tutor by subject mastery, grade-level experience, and schedule. You get an intro email with your tutor's credentials within 24–48 hours.</p></div>
+        <div class="step-card"><span class="step-number">3</span><h3>Sessions start with full visibility</h3><p>Every session is confirmed in advance. Within 2 hours of each lesson, you receive a written summary: what was covered, what needs work, and what's planned next.</p></div>
       </div>
     </div>
   </section>
-
-  <!-- What's included -->
   <section class="section cream">
     <div class="container">
       <span class="tag-label">What's Included</span>
       <h2 class="section-title">Every student gets the full Apex experience</h2>
       <p class="section-sub">This is not a platform where you figure things out yourself. Every service below is included with every booking.</p>
       <div class="included-grid">
-        <div class="inc-card">
-          <div class="inc-icon"><i class="ti ti-arrows-shuffle"></i></div>
-          <div>
-            <h4>Expert tutor matching</h4>
-            <p>We review your intake and assign a tutor based on subject, grade, and your student's specific challenges not just who's available.</p>
-          </div>
-        </div>
-        <div class="inc-card">
-          <div class="inc-icon"><i class="ti ti-notes"></i></div>
-          <div>
-            <h4>Written session notes every time</h4>
-            <p>Your tutor submits a structured note within 2 hours of each session: topics covered, gaps identified, next steps. Parents are never in the dark.</p>
-          </div>
-        </div>
-        <div class="inc-card">
-          <div class="inc-icon"><i class="ti ti-user"></i></div>
-          <div>
-            <h4>Same tutor, every week</h4>
-            <p>Your student works with the same tutor each session, no re-explaining, no resetting, and real relationship-building over time.</p>
-          </div>
-        </div>
-        <div class="inc-card">
-          <div class="inc-icon"><i class="ti ti-chart-line"></i></div>
-          <div>
-            <h4>Progress tracking and parent check-ins</h4>
-            <p>We track progress across sessions. Package buyers receive a structured check-in after every 4 sessions so you always know where things stand.</p>
-          </div>
-        </div>
+        <div class="inc-card"><div class="inc-icon"><i class="ti ti-arrows-shuffle"></i></div><div><h4>Expert tutor matching</h4><p>We review your intake and assign a tutor based on subject, grade, and your student's specific challenges — not just who's available.</p></div></div>
+        <div class="inc-card"><div class="inc-icon"><i class="ti ti-notes"></i></div><div><h4>Written session notes every time</h4><p>Your tutor submits a structured note within 2 hours of each session: topics covered, gaps identified, next steps. Parents are never in the dark.</p></div></div>
+        <div class="inc-card"><div class="inc-icon"><i class="ti ti-user"></i></div><div><h4>Same tutor, every week</h4><p>Your student works with the same tutor each session — no re-explaining, no resetting, and real relationship-building over time.</p></div></div>
+        <div class="inc-card"><div class="inc-icon"><i class="ti ti-chart-line"></i></div><div><h4>Progress tracking and parent check-ins</h4><p>We track progress across sessions. Package buyers receive a structured check-in after every 4 sessions so you always know where things stand.</p></div></div>
       </div>
     </div>
   </section>
-
-  <!-- Subjects preview -->
   <section class="section dark">
     <div class="container">
       <span class="tag-label light">Subjects at Launch</span>
-      <h2 class="section-title light">High school and middle school the subjects that matter most</h2>
+      <h2 class="section-title light">High school and middle school — the subjects that matter most</h2>
       <p class="section-sub light">We focus on grades 7–12 with tutors who have deep subject mastery, not just general familiarity.</p>
       <div class="subjects-grid">
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>Algebra I & II · Geometry · Pre-Calculus</h4>
-            <p>Grades 7–11 · Foundational through advanced</p>
-          </div>
-        </div>
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>Calculus AB & BC</h4>
-            <p>Grades 11–12 · AP and non-AP tracks</p>
-          </div>
-        </div>
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>Biology · Chemistry</h4>
-            <p>Grades 9–12 · Honors and AP levels</p>
-          </div>
-        </div>
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>English Writing & Composition</h4>
-            <p>Grades 7–12 · Essays, AP Lang, reading comprehension</p>
-          </div>
-        </div>
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>SAT & ACT Preparation</h4>
-            <p>Grades 10–12 · Diagnostic + structured packages</p>
-          </div>
-        </div>
-        <div class="subj-card">
-          <div class="subj-dot"></div>
-          <div>
-            <h4>Homework Help · Core Subjects</h4>
-            <p>Grades 7–12 · Flexible weekly support</p>
-          </div>
-        </div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>Algebra I and II · Geometry · Pre-Calculus</h4><p>Grades 7–11 · Foundational through advanced</p></div></div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>Calculus AB and BC</h4><p>Grades 11–12 · AP and non-AP tracks</p></div></div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>Biology · Chemistry</h4><p>Grades 9–12 · Honors and AP levels</p></div></div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>English Writing and Composition</h4><p>Grades 7–12 · Essays, AP Lang, reading comprehension</p></div></div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>SAT and ACT Preparation</h4><p>Grades 10–12 · Diagnostic + structured packages</p></div></div>
+        <div class="subj-card"><div class="subj-dot"></div><div><h4>Homework Help · Core Subjects</h4><p>Grades 7–12 · Flexible weekly support</p></div></div>
       </div>
       <p class="subjects-note">Additional subjects added by student demand in months 2–3.</p>
-      <div style="text-align:center;margin-top:32px">
-        <a href="#" class="btn btn-gold" onclick="showPage('subjects')">See All Subjects →</a>
-      </div>
+      <div style="text-align:center;margin-top:32px"><a href="#" class="btn btn-gold" onclick="showPage('subjects')">See All Subjects</a></div>
     </div>
   </section>
-
-  <!-- Tutor screening -->
   <section class="section white">
     <div class="container">
       <span class="tag-label">Tutor Standards</span>
       <h2 class="section-title">We screen every tutor so you don't have to wonder</h2>
       <p class="section-sub">Every tutor completes a four-step process before working with a single student. Most applicants don't make the cut.</p>
       <div class="screen-stats">
-        <div class="screen-stat">
-          <div class="screen-stat-num">4</div>
-          <div class="screen-stat-label">Screening steps</div>
-          <div class="screen-stat-desc">Application, interview, live sample lesson, and background check in that order</div>
-        </div>
-        <div class="screen-stat">
-          <div class="screen-stat-num">3.5+</div>
-          <div class="screen-stat-label">GPA required per subject</div>
-          <div class="screen-stat-desc">Not overall GPA we require strong performance specifically in the subject they tutor</div>
-        </div>
-        <div class="screen-stat">
-          <div class="screen-stat-num">Pass</div>
-          <div class="screen-stat-label">Live sample lesson</div>
-          <div class="screen-stat-desc">Every tutor teaches a real 15-minute lesson to an evaluator before joining the roster</div>
-        </div>
+        <div class="screen-stat"><div class="screen-stat-num">4</div><div class="screen-stat-label">Screening steps</div><div class="screen-stat-desc">Application, interview, live sample lesson, and background check — in that order</div></div>
+        <div class="screen-stat"><div class="screen-stat-num">3.5+</div><div class="screen-stat-label">GPA required per subject</div><div class="screen-stat-desc">Not overall GPA — we require strong performance specifically in the subject they tutor</div></div>
+        <div class="screen-stat"><div class="screen-stat-num">Pass</div><div class="screen-stat-label">Live sample lesson</div><div class="screen-stat-desc">Every tutor teaches a real 15-minute lesson to an evaluator before joining the roster</div></div>
       </div>
       <div class="screen-steps">
-        <div class="screen-step">
-          <div class="screen-step-num">1</div>
-          <div>
-            <h4>Application & resume review</h4>
-            <p>Subject background, academic credentials, and prior tutoring experience are screened before any interview is scheduled.</p>
-          </div>
-        </div>
-        <div class="screen-step">
-          <div class="screen-step-num">2</div>
-          <div>
-            <h4>30-minute video interview</h4>
-            <p>We assess communication clarity, reliability, and readiness for online instruction not just subject knowledge.</p>
-          </div>
-        </div>
-        <div class="screen-step">
-          <div class="screen-step-num">3</div>
-          <div>
-            <h4>Live 15-minute sample lesson</h4>
-            <p>Tutors teach a real concept to a real evaluator. We score pacing, clarity, and how they handle confusion.</p>
-          </div>
-        </div>
-        <div class="screen-step">
-          <div class="screen-step-num">4</div>
-          <div>
-            <h4>Reference check & background verification</h4>
-            <p>All tutors are background-checked before being matched with any student. References are verified, not just listed.</p>
-          </div>
-        </div>
+        <div class="screen-step"><div class="screen-step-num">1</div><div><h4>Application and resume review</h4><p>Subject background, academic credentials, and prior tutoring experience are screened before any interview is scheduled.</p></div></div>
+        <div class="screen-step"><div class="screen-step-num">2</div><div><h4>30-minute video interview</h4><p>We assess communication clarity, reliability, and readiness for online instruction — not just subject knowledge.</p></div></div>
+        <div class="screen-step"><div class="screen-step-num">3</div><div><h4>Live 15-minute sample lesson</h4><p>Tutors teach a real concept to a real evaluator. We score pacing, clarity, and how they handle confusion.</p></div></div>
+        <div class="screen-step"><div class="screen-step-num">4</div><div><h4>Reference check and background verification</h4><p>All tutors are background-checked before being matched with any student. References are verified, not just listed.</p></div></div>
       </div>
     </div>
   </section>
-
-  <!-- Test Prep Banner -->
   <section class="section gold-bg">
     <div class="container">
       <div class="testprep-banner">
         <div>
           <span class="tag-label">Test Prep</span>
-          <h2 class="section-title">SAT & ACT prep that actually moves the score</h2>
-          <p class="section-sub" style="margin-bottom:28px">Our test prep packages include a diagnostic assessment, targeted 1:1 instruction, and two full practice tests all delivered by tutors who know the exam structure inside and out.</p>
-          <a href="#" class="btn btn-navy" onclick="showPage('pricing')">See Test Prep Packages →</a>
+          <h2 class="section-title">SAT and ACT prep that actually moves the score</h2>
+          <p class="section-sub" style="margin-bottom:28px">Our test prep packages include a diagnostic assessment, targeted 1:1 instruction, and two full practice tests — delivered by tutors who know the exam structure inside and out.</p>
+          <a href="#" class="btn btn-navy" onclick="showPage('pricing')">See Test Prep Packages</a>
         </div>
         <div class="testprep-stats">
-          <div class="testprep-stat">
-            <div class="testprep-stat-num">5–15</div>
-            <div class="testprep-stat-label">sessions per package</div>
-          </div>
-          <div class="testprep-stat">
-            <div class="testprep-stat-num">1:1</div>
-            <div class="testprep-stat-label">personalized instruction</div>
-          </div>
-          <div class="testprep-stat">
-            <div class="testprep-stat-num">SAT + ACT</div>
-            <div class="testprep-stat-label">both covered</div>
-          </div>
+          <div class="testprep-stat"><div class="testprep-stat-num">5–15</div><div class="testprep-stat-label">sessions per package</div></div>
+          <div class="testprep-stat"><div class="testprep-stat-num">1:1</div><div class="testprep-stat-label">personalized instruction</div></div>
+          <div class="testprep-stat"><div class="testprep-stat-num">SAT + ACT</div><div class="testprep-stat-label">both covered</div></div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Pricing preview -->
   <section class="section cream">
     <div class="container">
       <span class="tag-label">Pricing</span>
-      <h2 class="section-title">Transparent pricing no hidden fees</h2>
+      <h2 class="section-title">Transparent pricing — no hidden fees</h2>
       <p class="section-sub">Every package includes tutor matching, session confirmation, and written notes after each lesson. Packages valid for 90 days.</p>
       <div class="pricing-grid">
         <div class="price-card">
@@ -857,7 +395,7 @@ footer {
             <div class="price-feat"><i class="ti ti-check"></i>Session notes sent to parent</div>
             <div class="price-feat"><i class="ti ti-check"></i>Online, 60 minutes</div>
           </div>
-<a href="https://buy.stripe.com/9B64gz1nY3ZD6WD3nnds402" class="btn btn-outline btn-full" target="_blank">Book a Session</a>
+          <a href="https://buy.stripe.com/9B64gz1nY3ZD6WD3nnds402" class="btn btn-outline btn-full" target="_blank">Book a Session</a>
         </div>
         <div class="price-card featured">
           <div class="price-badge">Most Popular</div>
@@ -871,7 +409,7 @@ footer {
             <div class="price-feat"><i class="ti ti-check"></i>Parent check-in at session 4</div>
             <div class="price-feat"><i class="ti ti-check"></i>First session free with this package</div>
           </div>
-          <a href="#" class="btn btn-navy btn-full" href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="btn btn-navy btn-full" target="_blank">Get This Package</a>
+          <a href="https://buy.stripe.com/14A14n5EeeEhep55vvds400" class="btn btn-navy btn-full" target="_blank">Get This Package</a>
         </div>
         <div class="price-card">
           <div class="price-tier">SAT / ACT Intensive</div>
@@ -879,20 +417,18 @@ footer {
           <div class="price-desc">10 structured sessions with diagnostic, targeted instruction, and practice tests.</div>
           <div class="price-features">
             <div class="price-feat"><i class="ti ti-check"></i>Diagnostic assessment first session</div>
-            <div class="price-feat"><i class="ti ti-check"></i>10 × 60-min targeted sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>10 x 60-min targeted sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>2 full practice tests included</div>
             <div class="price-feat"><i class="ti ti-check"></i>Pacing + strategy coaching</div>
           </div>
-          <a href="#" class="btn btn-outline btn-full" href="https://buy.stripe.com/14A14n5EeeEhep55vvds400" class="btn btn-outline btn-full" target="_blank">Start SAT/ACT Prep</a>
+          <a href="https://buy.stripe.com/8x24gzeaK53H2Gn5vvds403" class="btn btn-outline btn-full" target="_blank">Start SAT/ACT Prep</a>
         </div>
       </div>
       <div style="text-align:center;margin-top:24px">
-        <a href="#" class="btn btn-ghost" style="color:var(--navy);border-color:var(--navy)" onclick="showPage('pricing')">View Full Pricing & FAQs →</a>
+        <a href="#" class="btn btn-ghost" style="color:var(--navy);border-color:var(--navy)" onclick="showPage('pricing')">View Full Pricing and FAQs</a>
       </div>
     </div>
   </section>
-
-  <!-- Testimonials -->
   <section class="section white">
     <div class="container">
       <span class="tag-label">Parent Reviews</span>
@@ -900,14 +436,14 @@ footer {
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <blockquote>"I finally felt like I knew what was happening in my son's tutoring sessions. The written notes after every lesson were exactly what I needed I could see what they covered and what still needed work."</blockquote>
+          <blockquote>"I finally felt like I knew what was happening in my son's tutoring sessions. The written notes after every lesson were exactly what I needed — I could see what they covered and what still needed work."</blockquote>
           <div class="testi-author">Michelle T.</div>
           <div class="testi-role">Parent of 10th grader · Chemistry</div>
           <div class="testi-result"><i class="ti ti-trending-up"></i> Grade moved from C to B+ in 6 weeks</div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <blockquote>"We'd tried tutoring apps before you pick someone from a list and hope for the best. Apex was completely different. They matched my daughter quickly, the tutor was excellent, and her SAT score jumped 120 points."</blockquote>
+          <blockquote>"We'd tried tutoring apps before — you pick someone from a list and hope for the best. Apex was completely different. They matched my daughter quickly, the tutor was excellent, and her SAT score jumped 120 points."</blockquote>
           <div class="testi-author">James R.</div>
           <div class="testi-role">Parent of 11th grader · SAT Prep</div>
           <div class="testi-result"><i class="ti ti-trending-up"></i> +120 SAT points across 10 sessions</div>
@@ -915,37 +451,22 @@ footer {
       </div>
     </div>
   </section>
-
-  <!-- Final CTA -->
   <section class="final-cta">
     <div class="container">
       <span class="tag-label light" style="display:block;text-align:center;margin-bottom:14px">Get Started</span>
       <h2>Book your free 15-minute consultation</h2>
-      <p>Tell us what your student needs. We'll explain our process, recommend the right tutor type, and answer any questions no commitment required.</p>
+      <p>Tell us what your student needs. We'll explain our process, recommend the right tutor type, and answer any questions — no commitment required.</p>
       <div class="cta-offer-boxes">
-        <div class="cta-offer-box highlight">
-          <div class="cta-offer-box-label">Step 1 — Free</div>
-          <div class="cta-offer-box-val">15-min consultation call</div>
-        </div>
-        <div class="cta-offer-box">
-          <div class="cta-offer-box-label">Step 2 — Optional</div>
-          <div class="cta-offer-box-val">Paid diagnostic session</div>
-        </div>
-        <div class="cta-offer-box">
-          <div class="cta-offer-box-label">Step 3 — Best value</div>
-          <div class="cta-offer-box-val">Package + first session free</div>
-        </div>
+        <div class="cta-offer-box highlight"><div class="cta-offer-box-label">Step 1 — Free</div><div class="cta-offer-box-val">15-min consultation call</div></div>
+        <div class="cta-offer-box"><div class="cta-offer-box-label">Step 2 — Optional</div><div class="cta-offer-box-val">Paid diagnostic session</div></div>
+        <div class="cta-offer-box"><div class="cta-offer-box-label">Step 3 — Best value</div><div class="cta-offer-box-val">Package + first session free</div></div>
       </div>
-      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation →</a>
+      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation</a>
       <p class="final-cta-note">We respond within 24 hours · No credit card required · Cancel anytime</p>
     </div>
   </section>
+</div>
 
-</div><!-- end page-home -->
-
-<!-- ============================================================
-     SUBJECTS PAGE
-============================================================ -->
 <div class="page" id="page-subjects">
   <section class="subjects-page-hero">
     <div class="container">
@@ -958,105 +479,39 @@ footer {
     <div class="container">
       <div class="subject-cards">
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-math"></i></div>
-            <div>
-              <h3>Algebra I & II · Geometry · Pre-Calculus</h3>
-              <span class="grade-tag">Grades 7–11</span>
-            </div>
-          </div>
-          <p>From solving linear equations to mastering functions and trigonometry our math tutors build real conceptual understanding, not just formula memorization.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>Algebra I & II (Grades 7–9)</li>
-            <li><i class="ti ti-check"></i>Geometry (Grades 8–10)</li>
-            <li><i class="ti ti-check"></i>Pre-Calculus (Grades 10–11)</li>
-            <li><i class="ti ti-check"></i>Honors and standard tracks</li>
-          </ul>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-math"></i></div><div><h3>Algebra I and II · Geometry · Pre-Calculus</h3><span class="grade-tag">Grades 7–11</span></div></div>
+          <p>From solving linear equations to mastering functions and trigonometry — our math tutors build real conceptual understanding, not just formula memorization.</p>
+          <ul><li><i class="ti ti-check"></i>Algebra I and II (Grades 7–9)</li><li><i class="ti ti-check"></i>Geometry (Grades 8–10)</li><li><i class="ti ti-check"></i>Pre-Calculus (Grades 10–11)</li><li><i class="ti ti-check"></i>Honors and standard tracks</li></ul>
         </div>
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-sum"></i></div>
-            <div>
-              <h3>Calculus AB & BC</h3>
-              <span class="grade-tag">Grades 11–12</span>
-            </div>
-          </div>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-sum"></i></div><div><h3>Calculus AB and BC</h3><span class="grade-tag">Grades 11–12</span></div></div>
           <p>Our Calculus tutors have college-level math backgrounds and AP exam experience. We break down limits, derivatives, and integrals into structured, clear sessions.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>AP Calculus AB</li>
-            <li><i class="ti ti-check"></i>AP Calculus BC</li>
-            <li><i class="ti ti-check"></i>Non-AP Calculus</li>
-            <li><i class="ti ti-check"></i>Exam-focused prep available</li>
-          </ul>
+          <ul><li><i class="ti ti-check"></i>AP Calculus AB</li><li><i class="ti ti-check"></i>AP Calculus BC</li><li><i class="ti ti-check"></i>Non-AP Calculus</li><li><i class="ti ti-check"></i>Exam-focused prep available</li></ul>
         </div>
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-flask"></i></div>
-            <div>
-              <h3>Biology & Chemistry</h3>
-              <span class="grade-tag">Grades 9–12</span>
-            </div>
-          </div>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-flask"></i></div><div><h3>Biology and Chemistry</h3><span class="grade-tag">Grades 9–12</span></div></div>
           <p>Science tutoring that goes beyond re-reading the textbook. Our tutors use concept mapping, problem sets, and lab report support to help students build durable understanding.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>Biology (standard + AP)</li>
-            <li><i class="ti ti-check"></i>Chemistry (standard + Honors + AP)</li>
-            <li><i class="ti ti-check"></i>Exam prep included</li>
-            <li><i class="ti ti-check"></i>Lab report and essay support</li>
-          </ul>
+          <ul><li><i class="ti ti-check"></i>Biology (standard + AP)</li><li><i class="ti ti-check"></i>Chemistry (standard + Honors + AP)</li><li><i class="ti ti-check"></i>Exam prep included</li><li><i class="ti ti-check"></i>Lab report and essay support</li></ul>
         </div>
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-pencil"></i></div>
-            <div>
-              <h3>English Writing & Composition</h3>
-              <span class="grade-tag">Grades 7–12</span>
-            </div>
-          </div>
-          <p>From five-paragraph essays to AP Language analysis our English tutors focus on structure, argumentation, and clarity so students can write with confidence across any assignment.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>Essay writing and structure</li>
-            <li><i class="ti ti-check"></i>Reading comprehension</li>
-            <li><i class="ti ti-check"></i>AP Language & Composition</li>
-            <li><i class="ti ti-check"></i>College application essay support</li>
-          </ul>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-pencil"></i></div><div><h3>English Writing and Composition</h3><span class="grade-tag">Grades 7–12</span></div></div>
+          <p>From five-paragraph essays to AP Language analysis — our English tutors focus on structure, argumentation, and clarity so students can write with confidence.</p>
+          <ul><li><i class="ti ti-check"></i>Essay writing and structure</li><li><i class="ti ti-check"></i>Reading comprehension</li><li><i class="ti ti-check"></i>AP Language and Composition</li><li><i class="ti ti-check"></i>College application essay support</li></ul>
         </div>
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-clipboard-check"></i></div>
-            <div>
-              <h3>SAT & ACT Preparation</h3>
-              <span class="grade-tag">Grades 10–12</span>
-            </div>
-          </div>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-clipboard-check"></i></div><div><h3>SAT and ACT Preparation</h3><span class="grade-tag">Grades 10–12</span></div></div>
           <p>Our test prep is structured, diagnostic-first, and results-driven. We identify weak areas in the first session, then build a targeted plan to close those gaps before test day.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>SAT Math, Reading & Writing</li>
-            <li><i class="ti ti-check"></i>ACT English, Math, Reading, Science</li>
-            <li><i class="ti ti-check"></i>Diagnostic assessment included</li>
-            <li><i class="ti ti-check"></i>5, 10, or 15-session packages</li>
-          </ul>
+          <ul><li><i class="ti ti-check"></i>SAT Math, Reading and Writing</li><li><i class="ti ti-check"></i>ACT English, Math, Reading, Science</li><li><i class="ti ti-check"></i>Diagnostic assessment included</li><li><i class="ti ti-check"></i>5, 10, or 15-session packages</li></ul>
         </div>
         <div class="subject-full-card">
-          <div class="subj-header">
-            <div class="subj-icon"><i class="ti ti-book"></i></div>
-            <div>
-              <h3>Homework Help · Core Subjects</h3>
-              <span class="grade-tag">Grades 7–12</span>
-            </div>
-          </div>
-          <p>Flexible, weekly homework support for students who need consistent accountability and a knowledgeable person to work through problems with not just someone to give them answers.</p>
-          <ul>
-            <li><i class="ti ti-check"></i>Any core subject, grades 7–12</li>
-            <li><i class="ti ti-check"></i>Weekly recurring sessions</li>
-            <li><i class="ti ti-check"></i>Study skills and time management</li>
-            <li><i class="ti ti-check"></i>Best paired with single or 4-session package</li>
-          </ul>
+          <div class="subj-header"><div class="subj-icon"><i class="ti ti-book"></i></div><div><h3>Homework Help · Core Subjects</h3><span class="grade-tag">Grades 7–12</span></div></div>
+          <p>Flexible, weekly homework support for students who need consistent accountability and a knowledgeable person to work through problems with.</p>
+          <ul><li><i class="ti ti-check"></i>Any core subject, grades 7–12</li><li><i class="ti ti-check"></i>Weekly recurring sessions</li><li><i class="ti ti-check"></i>Study skills and time management</li><li><i class="ti ti-check"></i>Best paired with single or 4-session package</li></ul>
         </div>
       </div>
       <div style="text-align:center;margin-top:44px">
-        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Don't see your subject? Contact us we may be able to match you.</p>
-        <a href="#" class="btn btn-navy btn-lg" onclick="showPage('contact')">Get Matched With a Tutor →</a>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:18px">Don't see your subject? Contact us — we may be able to match you.</p>
+        <a href="#" class="btn btn-navy btn-lg" onclick="showPage('contact')">Get Matched With a Tutor</a>
       </div>
     </div>
   </section>
@@ -1064,19 +519,16 @@ footer {
     <div class="container" style="text-align:center">
       <h2>Ready to get started?</h2>
       <p>Book your free 15-minute consultation and we'll match your student with the right tutor within 48 hours.</p>
-      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation →</a>
+      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation</a>
     </div>
   </section>
 </div>
 
-<!-- ============================================================
-     PRICING PAGE
-============================================================ -->
 <div class="page" id="page-pricing">
   <section class="pricing-page-hero">
     <div class="container">
       <span class="tag-label light">Pricing</span>
-      <h1>Transparent pricing no hidden fees, no surprises</h1>
+      <h1>Transparent pricing — no hidden fees, no surprises</h1>
       <p>Every package includes tutor matching, session confirmation, and written notes after each lesson. Packages valid for 90 days from purchase.</p>
     </div>
   </section>
@@ -1093,7 +545,7 @@ footer {
             <div class="price-feat"><i class="ti ti-check"></i>Online via Zoom or Google Meet</div>
             <div class="price-feat"><i class="ti ti-check"></i>60 minutes</div>
           </div>
-<a href="https://buy.stripe.com/9B64gz1nY3ZD6WD3nnds402" class="btn btn-outline btn-full" target="_blank">Book a Session</a>
+          <a href="https://buy.stripe.com/9B64gz1nY3ZD6WD3nnds402" class="btn btn-outline btn-full" target="_blank">Book a Session</a>
         </div>
         <div class="price-card">
           <div class="price-tier">4-Session Package</div>
@@ -1101,27 +553,27 @@ footer {
           <div class="price-save">Save 8%</div>
           <div class="price-desc">Four weeks of consistent support. Ideal for exam prep, one tough unit, or seeing how tutoring feels before a larger commitment.</div>
           <div class="price-features">
-            <div class="price-feat"><i class="ti ti-check"></i>4 × 60-min sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>4 x 60-min sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>Same tutor each session</div>
             <div class="price-feat"><i class="ti ti-check"></i>Session notes after every lesson</div>
             <div class="price-feat"><i class="ti ti-check"></i>First session free (limited offer)</div>
           </div>
-          <a href="#" class="btn btn-outline btn-full" href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="btn btn-outline btn-full" target="_blank">Get 4 Sessions</a>
+          <a href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="btn btn-outline btn-full" target="_blank">Get 4 Sessions</a>
         </div>
         <div class="price-card featured">
           <div class="price-badge">Most Popular</div>
           <div class="price-tier">8-Session Package</div>
           <div class="price-amount">$440 <span>($55/session)</span></div>
           <div class="price-save">Save 15%</div>
-          <div class="price-desc">Eight weeks of consistent weekly support our most popular option for students working through a full unit or semester.</div>
+          <div class="price-desc">Eight weeks of consistent weekly support — our most popular option for students working through a full unit or semester.</div>
           <div class="price-features">
-            <div class="price-feat"><i class="ti ti-check"></i>8 × 60-min sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>8 x 60-min sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>Same tutor every week</div>
             <div class="price-feat"><i class="ti ti-check"></i>Session notes after every lesson</div>
             <div class="price-feat"><i class="ti ti-check"></i>Parent progress check-in at session 4</div>
             <div class="price-feat"><i class="ti ti-check"></i>First session free (limited offer)</div>
           </div>
-          <a href="#" class="btn btn-navy btn-full" href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="btn btn-navy btn-full" target="_blank">Get This Package</a>
+          <a href="https://buy.stripe.com/14A14n5EeeEhep55vvds400" class="btn btn-navy btn-full" target="_blank">Get This Package</a>
         </div>
         <div class="price-card">
           <div class="price-tier">12-Session Package</div>
@@ -1129,13 +581,13 @@ footer {
           <div class="price-save">Save 23%</div>
           <div class="price-desc">Our best value for long-term support. Ideal for students who need ongoing help across a full semester or multiple topics.</div>
           <div class="price-features">
-            <div class="price-feat"><i class="ti ti-check"></i>12 × 60-min sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>12 x 60-min sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>Same tutor every week</div>
             <div class="price-feat"><i class="ti ti-check"></i>Session notes after every lesson</div>
-            <div class="price-feat"><i class="ti ti-check"></i>Progress check-ins at sessions 4 & 8</div>
+            <div class="price-feat"><i class="ti ti-check"></i>Progress check-ins at sessions 4 and 8</div>
             <div class="price-feat"><i class="ti ti-check"></i>First session free (limited offer)</div>
           </div>
-          <a href="#" class="btn btn-outline btn-full" href="https://buy.stripe.com/28E9AT3w60Nr5Sz4rrds401" class="btn btn-outline btn-full" target="_blank">Get 12 Sessions</a>
+          <a href="https://buy.stripe.com/00w5kDeaK0Nra8Pga9ds405" class="btn btn-outline btn-full" target="_blank">Get 12 Sessions</a>
         </div>
         <div class="price-card">
           <div class="price-tier">SAT/ACT Starter</div>
@@ -1143,11 +595,11 @@ footer {
           <div class="price-desc">5 sessions of focused test prep with a diagnostic and a structured plan. Best for students 6–8 weeks before their test date.</div>
           <div class="price-features">
             <div class="price-feat"><i class="ti ti-check"></i>Diagnostic assessment (session 1)</div>
-            <div class="price-feat"><i class="ti ti-check"></i>5 × 60-min targeted sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>5 x 60-min targeted sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>Strategy + pacing coaching</div>
             <div class="price-feat"><i class="ti ti-check"></i>SAT or ACT (your choice)</div>
           </div>
-          <a href="#" class="btn btn-outline btn-full" href="https://buy.stripe.com/14A14n5EeeEhep55vvds400" class="btn btn-outline btn-full" target="_blank">Start SAT/ACT Prep</a>
+          <a href="https://buy.stripe.com/bJecN57Mm7bPep5ga9ds404" class="btn btn-outline btn-full" target="_blank">Start SAT/ACT Prep</a>
         </div>
         <div class="price-card">
           <div class="price-tier">SAT/ACT Intensive</div>
@@ -1156,22 +608,20 @@ footer {
           <div class="price-desc">10 structured sessions with diagnostic, targeted instruction, two full practice tests, and pacing + strategy coaching.</div>
           <div class="price-features">
             <div class="price-feat"><i class="ti ti-check"></i>Diagnostic assessment (session 1)</div>
-            <div class="price-feat"><i class="ti ti-check"></i>10 × 60-min targeted sessions</div>
+            <div class="price-feat"><i class="ti ti-check"></i>10 x 60-min targeted sessions</div>
             <div class="price-feat"><i class="ti ti-check"></i>2 full practice tests included</div>
             <div class="price-feat"><i class="ti ti-check"></i>Pacing + strategy coaching</div>
             <div class="price-feat"><i class="ti ti-check"></i>SAT or ACT (your choice)</div>
           </div>
-          <a href="#" class="btn btn-navy btn-full" href="https://buy.stripe.com/14A14n5EeeEhep55vvds400" class="btn btn-navy btn-full" target="_blank">Get Intensive Prep</a>
+          <a href="https://buy.stripe.com/8x24gzeaK53H2Gn5vvds403" class="btn btn-navy btn-full" target="_blank">Get Intensive Prep</a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Cancellation policy -->
   <section class="section white">
     <div class="container">
       <div class="cancellation-box">
-        <h3>Cancellation & Refund Policy</h3>
+        <h3>Cancellation and Refund Policy</h3>
         <p><strong>Cancellations with 24+ hours notice:</strong> Full reschedule at no charge.</p>
         <p><strong>Cancellations with less than 24 hours notice:</strong> 50% session credit applied to your account (no refund).</p>
         <p><strong>No-shows:</strong> Full session charge applies. No reschedule credit.</p>
@@ -1180,67 +630,37 @@ footer {
       </div>
     </div>
   </section>
-
-  <!-- FAQ -->
   <div class="faq-section">
     <div class="container">
       <span class="tag-label">FAQs</span>
       <h2 class="section-title">Questions parents ask before booking</h2>
       <div class="faq-grid">
-        <div class="faq-item">
-          <h4>How do I know which tutor my student will get?</h4>
-          <p>After you submit the intake form, we review your student's needs and match them with the best-fit tutor. You receive an intro email with your tutor's name, credentials, and relevant background before the first session.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I switch tutors if it's not a good fit?</h4>
-          <p>Yes, always. Just contact us and we'll arrange a new match, no awkward conversations required. Your sessions carry over.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What platform do sessions happen on?</h4>
-          <p>Sessions are held online via Zoom or Google Meet, with a shared digital whiteboard. All your student needs is a device with a camera and internet.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How do session notes work?</h4>
-          <p>Within 2 hours of every session, your tutor submits a structured note covering what was taught, what your student still needs to practice, and what's planned for next time. We email it directly to you.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Do packages expire?</h4>
-          <p>Packages are valid for 90 days from the date of purchase. If you need an extension, contact us we handle it case by case.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What if my student has a learning difference?</h4>
-          <p>Let us know on your intake form. We ask about accommodations and match students with tutors who have relevant experience. We currently serve students with ADHD, dyslexia, and other common learning differences.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How quickly can we start?</h4>
-          <p>Most families book their first session within 48–72 hours of submitting an intake form. If you need something sooner, note it in your form and we'll prioritize your match.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What grades and ages do you serve?</h4>
-          <p>We currently serve students in grades 7–12 (ages approximately 12–18). Our tutors specialize in middle and high school curriculum and college prep.</p>
-        </div>
+        <div class="faq-item"><h4>How do I know which tutor my student will get?</h4><p>After you submit the intake form, we review your student's needs and match them with the best-fit tutor. You receive an intro email with your tutor's name, credentials, and relevant background before the first session.</p></div>
+        <div class="faq-item"><h4>Can I switch tutors if it's not a good fit?</h4><p>Yes, always. Just contact us and we'll arrange a new match — no awkward conversations required. Your sessions carry over.</p></div>
+        <div class="faq-item"><h4>What platform do sessions happen on?</h4><p>Sessions are held online via Zoom or Google Meet, with a shared digital whiteboard. All your student needs is a device with a camera and internet.</p></div>
+        <div class="faq-item"><h4>How do session notes work?</h4><p>Within 2 hours of every session, your tutor submits a structured note covering what was taught, what your student still needs to practice, and what's planned for next time. We email it directly to you.</p></div>
+        <div class="faq-item"><h4>Do packages expire?</h4><p>Packages are valid for 90 days from the date of purchase. If you need an extension, contact us — we handle it case by case.</p></div>
+        <div class="faq-item"><h4>What if my student has a learning difference?</h4><p>Let us know on your intake form. We ask about accommodations and match students with tutors who have relevant experience. We currently serve students with ADHD, dyslexia, and other common learning differences.</p></div>
+        <div class="faq-item"><h4>How quickly can we start?</h4><p>Most families book their first session within 48–72 hours of submitting an intake form. If you need something sooner, note it in your form and we'll prioritize your match.</p></div>
+        <div class="faq-item"><h4>What grades and ages do you serve?</h4><p>We currently serve students in grades 7–12 (ages approximately 12–18). Our tutors specialize in middle and high school curriculum and college prep.</p></div>
       </div>
     </div>
   </div>
-
   <section class="final-cta">
     <div class="container" style="text-align:center">
       <h2>Still have questions?</h2>
-      <p>Book a free 15-minute consultation we'll answer everything and help you pick the right package for your student.</p>
-      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation →</a>
+      <p>Book a free 15-minute consultation — we'll answer everything and help you pick the right package for your student.</p>
+      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation</a>
     </div>
   </section>
 </div>
 
-<!-- ============================================================
-     ABOUT PAGE
-============================================================ -->
 <div class="page" id="page-about">
   <section class="about-hero">
     <div class="container">
       <span class="tag-label light">About</span>
       <h1>A Tutoring Company Built on Standards</h1>
-      <p>Apex Academic was built on a simple belief: students perform better when they have consistent, accountable support and parents should never have to wonder whether their investment is working.</p>
+      <p>Apex Academic was built on a simple belief: students perform better when they have consistent, accountable support — and parents should never have to wonder whether their investment is working.</p>
     </div>
   </section>
   <section class="about-content">
@@ -1250,47 +670,23 @@ footer {
           <p>We are a managed tutoring company, which means we do more than connect you with a tutor. We screen and interview every tutor on our roster, match students based on subject, schedule, and learning style, and send parents a written session update after every lesson.</p>
           <p>We work with families across the United States, serving students in grades 7–12 across math, science, English, and test preparation. Our focus is high school, because that's where access to the right support matters most for a student's future options.</p>
           <h3>Why we built this differently</h3>
-          <p>Most tutoring platforms are marketplaces you browse profiles, read reviews, pick someone, and hope. There's no matching, no quality control, and no accountability after the session ends. You don't know what happened during the lesson or whether it helped.</p>
-          <p>Apex Academic is different because we treat tutoring as a managed service, not a gig economy platform. We hire tutors the way a company hires staff with interviews, assessments, and standards. We assign them the way a company assigns work based on fit, not availability. And we hold them accountable the way a company manages performance with documented standards and monthly reviews.</p>
+          <p>Most tutoring platforms are marketplaces — you browse profiles, read reviews, pick someone, and hope. There's no matching, no quality control, and no accountability after the session ends. You don't know what happened during the lesson or whether it helped.</p>
+          <p>Apex Academic is different because we treat tutoring as a managed service, not a gig economy platform. We hire tutors the way a company hires staff — with interviews, assessments, and standards. We assign them based on fit, not availability. And we hold them accountable with documented standards and monthly reviews.</p>
           <h3>About the founder</h3>
-          <p>Apex Academic was founded by Isti Khalil, a Behavioral Neuroscience student at Northeastern University with three years of hands-on research experience at the Wistar Institute and the University of Pennsylvania Perelman School of Medicine. He has seen firsthand how much access to quality academic support shapes a student's trajectory, and he built Apex Academic to make that access reliable, consistent, and results-driven.</p>
-          <p>As founder and CEO, Isti oversees tutor recruitment, quality control, and all operations so every family gets a consistent, professional experience from day one.</p>
+          <p>Apex Academic was founded by Isti Khalil, a Behavioral Neuroscience student at Northeastern University with three years of hands-on research experience at the Wistar Institute and the University of Pennsylvania Perelman School of Medicine. She has seen firsthand how much access to quality academic support shapes a student's trajectory — and she built Apex Academic to make that access reliable, consistent, and results-driven.</p>
+          <p>As founder and CEO, Isti oversees tutor recruitment, quality control, and all operations — so every family gets a consistent, professional experience from day one.</p>
         </div>
         <div class="about-sidebar">
-          <div class="about-stat-card">
-            <div class="num">7–12</div>
-            <div class="label">Grades served at launch</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="num">4</div>
-            <div class="label">Tutor screening steps</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="num">48hr</div>
-            <div class="label">Average match time</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="num">24hr</div>
-            <div class="label">Response guarantee</div>
-          </div>
+          <div class="about-stat-card"><div class="num">7–12</div><div class="label">Grades served at launch</div></div>
+          <div class="about-stat-card"><div class="num">4</div><div class="label">Tutor screening steps</div></div>
+          <div class="about-stat-card"><div class="num">48hr</div><div class="label">Average match time</div></div>
+          <div class="about-stat-card"><div class="num">24hr</div><div class="label">Response guarantee</div></div>
         </div>
       </div>
       <div class="about-values">
-        <div class="value-card">
-          <i class="ti ti-shield-check"></i>
-          <h4>Accountability</h4>
-          <p>Every session is documented. Every tutor is reviewed. Every parent is kept informed. We don't let problems slide.</p>
-        </div>
-        <div class="value-card">
-          <i class="ti ti-users"></i>
-          <h4>Consistency</h4>
-          <p>Same tutor, every week. No rotating strangers. We build student-tutor relationships because relationships drive results.</p>
-        </div>
-        <div class="value-card">
-          <i class="ti ti-chart-bar"></i>
-          <h4>Transparency</h4>
-          <p>Written notes after every session. Progress check-ins every four sessions. You always know what's happening.</p>
-        </div>
+        <div class="value-card"><i class="ti ti-shield-check"></i><h4>Accountability</h4><p>Every session is documented. Every tutor is reviewed. Every parent is kept informed. We don't let problems slide.</p></div>
+        <div class="value-card"><i class="ti ti-users"></i><h4>Consistency</h4><p>Same tutor, every week. No rotating strangers. We build student-tutor relationships because relationships drive results.</p></div>
+        <div class="value-card"><i class="ti ti-chart-bar"></i><h4>Transparency</h4><p>Written notes after every session. Progress check-ins every four sessions. You always know what's happening.</p></div>
       </div>
     </div>
   </section>
@@ -1298,14 +694,11 @@ footer {
     <div class="container" style="text-align:center">
       <h2>Ready to work with us?</h2>
       <p>Book your free 15-minute consultation and we'll get your student matched within 48 hours.</p>
-      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation →</a>
+      <a href="#" class="btn btn-gold btn-lg" onclick="showPage('contact')">Book Free Consultation</a>
     </div>
   </section>
 </div>
 
-<!-- ============================================================
-     CONTACT PAGE
-============================================================ -->
 <div class="page" id="page-contact">
   <section class="contact-hero">
     <div class="container">
@@ -1320,32 +713,16 @@ footer {
         <div class="contact-form">
           <h3>Student Intake Form</h3>
           <div class="form-row">
-            <div class="form-group">
-              <label>Your name (parent)</label>
-              <input type="text" placeholder="Jane Smith">
-            </div>
-            <div class="form-group">
-              <label>Student's first name</label>
-              <input type="text" placeholder="Alex">
-            </div>
+            <div class="form-group"><label>Your name (parent)</label><input type="text" placeholder="Jane Smith"></div>
+            <div class="form-group"><label>Student's first name</label><input type="text" placeholder="Alex"></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Email address</label>
-              <input type="email" placeholder="you@email.com">
-            </div>
-            <div class="form-group">
-              <label>Phone (optional)</label>
-              <input type="tel" placeholder="(215) 555-0100">
-            </div>
+            <div class="form-group"><label>Email address</label><input type="email" placeholder="you@email.com"></div>
+            <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(215) 555-0100"></div>
           </div>
           <div class="form-group">
             <label>Student's current grade</label>
-            <select>
-              <option value="">Select grade...</option>
-              <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
-              <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
-            </select>
+            <select><option value="">Select grade...</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select>
           </div>
           <div class="form-group">
             <label>Subject(s) needed</label>
@@ -1358,20 +735,10 @@ footer {
               <label class="checkbox-item"><input type="checkbox"> Homework Help</label>
             </div>
           </div>
-          <div class="form-group">
-            <label>Describe the main challenge your student is facing</label>
-            <textarea placeholder="e.g. Struggling with quadratic equations, falling behind after missing school, preparing for SAT in March..."></textarea>
-          </div>
+          <div class="form-group"><label>Describe the main challenge your student is facing</label><textarea placeholder="e.g. Struggling with quadratic equations, falling behind after missing school, preparing for SAT in March..."></textarea></div>
           <div class="form-group">
             <label>Main goal</label>
-            <select>
-              <option value="">Select goal...</option>
-              <option>Better grades</option>
-              <option>Test prep (SAT/ACT)</option>
-              <option>Building confidence</option>
-              <option>Keeping up with coursework</option>
-              <option>Other</option>
-            </select>
+            <select><option value="">Select goal...</option><option>Better grades</option><option>Test prep (SAT/ACT)</option><option>Building confidence</option><option>Keeping up with coursework</option><option>Other</option></select>
           </div>
           <div class="form-group">
             <label>Preferred session times</label>
@@ -1384,39 +751,20 @@ footer {
           </div>
           <div class="form-group">
             <label>How did you hear about Apex Academic?</label>
-            <select>
-              <option value="">Select...</option>
-              <option>Google search</option>
-              <option>Friend or family referral</option>
-              <option>Social media</option>
-              <option>School counselor</option>
-              <option>Other</option>
-            </select>
+            <select><option value="">Select...</option><option>Google search</option><option>Friend or family referral</option><option>Social media</option><option>School counselor</option><option>Other</option></select>
           </div>
-          <div class="form-group">
-            <label>Anything else we should know? (optional)</label>
-            <textarea placeholder="Learning differences, accommodations, previous tutoring experience, urgency..."></textarea>
-          </div>
-          <button class="btn btn-navy btn-full btn-lg" onclick="submitForm()">Submit We'll Be in Touch Within 24 Hours →</button>
+          <div class="form-group"><label>Anything else we should know? (optional)</label><textarea placeholder="Learning differences, accommodations, previous tutoring experience, urgency..."></textarea></div>
+          <button class="btn btn-navy btn-full btn-lg" onclick="submitForm()">Submit — We'll Be in Touch Within 24 Hours</button>
           <div class="form-success" id="formSuccess">
             <i class="ti ti-circle-check"></i>
             <p>Thank you! We received your form and will be in touch within 24 hours to discuss your student's needs.</p>
           </div>
         </div>
         <div class="contact-sidebar">
+          <div class="contact-info-card"><i class="ti ti-clock"></i><h4>We respond within 24 hours</h4><p>Submit your form and expect to hear from us by the next business day. We review every submission personally.</p></div>
+          <div class="contact-info-card"><i class="ti ti-mail"></i><h4>Email us directly</h4><p>khalilisti7@gmail.com</p></div>
           <div class="contact-info-card">
-            <i class="ti ti-clock"></i>
-            <h4>We respond within 24 hours</h4>
-            <p>Submit your form and expect to hear from us by the next business day. We review every submission personally.</p>
-          </div>
-          <div class="contact-info-card">
-            <i class="ti ti-mail"></i>
-            <h4>Email us directly</h4>
-            <p>khalilisti7@gmail.com</p>
-          </div>
-          <div class="contact-info-card">
-            <i class="ti ti-shield-check"></i>
-            <h4>What to expect</h4>
+            <i class="ti ti-shield-check"></i><h4>What to expect</h4>
             <div class="trust-list">
               <div class="trust-list-item"><i class="ti ti-check"></i>Free 15-min consultation call</div>
               <div class="trust-list-item"><i class="ti ti-check"></i>Tutor matched within 48 hours</div>
@@ -1425,26 +773,19 @@ footer {
               <div class="trust-list-item"><i class="ti ti-check"></i>Session notes after every lesson</div>
             </div>
           </div>
-          <div class="contact-info-card" style="background:var(--gold-bg);border-color:var(--gold-bdr)">
-            <i class="ti ti-gift"></i>
-            <h4>Current offer</h4>
-            <p>First session free with any 4-session package. Mention this when we call.</p>
-          </div>
+          <div class="contact-info-card" style="background:var(--gold-bg);border-color:var(--gold-bdr)"><i class="ti ti-gift"></i><h4>Current offer</h4><p>First session free with any 4-session package. Mention this when we call.</p></div>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ============================================================
-     FOOTER (shown on all pages)
-============================================================ -->
 <footer>
   <div class="container">
     <div class="footer-inner">
       <div>
         <div class="footer-brand">Apex <span>Academic</span></div>
-        <p class="footer-tagline">Online tutoring for grades 7–12 managed, accountable, and results-driven.</p>
+        <p class="footer-tagline">Online tutoring for grades 7–12 — managed, accountable, and results-driven.</p>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
@@ -1469,7 +810,7 @@ footer {
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Apex Academic LLC · Online tutoring for grades 7–12 · U.S.-Wide</div>
+      <div class="footer-copy">2025 Apex Academic LLC · Online tutoring for grades 7–12 · U.S.-Wide</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -1479,30 +820,23 @@ footer {
   </div>
 </footer>
 
-<!-- ============================================================
-     JAVASCRIPT
-============================================================ -->
 <script>
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
-
 function closeMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
-
 function submitForm() {
   const data = new FormData();
   data.append('email', document.querySelector('input[type="email"]').value);
   data.append('parent-name', document.querySelectorAll('input[type="text"]')[0].value);
   data.append('student-name', document.querySelectorAll('input[type="text"]')[1].value);
-
   fetch('https://formspree.io/f/mlgvlglb', {
     method: 'POST',
     body: data,
@@ -1516,8 +850,6 @@ function submitForm() {
     alert('Something went wrong. Please email us directly at khalilisti7@gmail.com');
   });
 }
-
-// Intersection observer for scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1526,14 +858,12 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1 });
-
-document.querySelectorAll('.step-card, .inc-card, .subj-card, .price-card, .testi-card, .screen-step, .faq-item, .subject-full-card, .value-card').forEach(el => {
+document.querySelectorAll('.step-card,.inc-card,.subj-card,.price-card,.testi-card,.screen-step,.faq-item,.subject-full-card,.value-card').forEach(el => {
   el.style.transition = 'opacity .5s ease, transform .5s ease';
   el.style.opacity = '0';
   el.style.transform = 'translateY(16px)';
   observer.observe(el);
 });
 </script>
-
 </body>
 </html>
