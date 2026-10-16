@@ -836,20 +836,63 @@ function closeMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
 function submitForm() {
+  const form = document.querySelector('.contact-form');
+  const btn = form.querySelector('button.btn');
   const data = new FormData();
-  data.append('email', document.querySelector('input[type="email"]').value);
-  data.append('parent-name', document.querySelectorAll('input[type="text"]')[0].value);
-  data.append('student-name', document.querySelectorAll('input[type="text"]')[1].value);
+  const required = ['Your name (parent)', "Student's first name", 'Email address'];
+  const missing = [];
+
+  form.querySelectorAll('.form-group').forEach(group => {
+    const label = group.querySelector('label').textContent.trim();
+    const boxes = group.querySelectorAll('input[type="checkbox"]');
+    let value;
+
+    if (boxes.length) {
+      value = Array.from(boxes)
+        .filter(b => b.checked)
+        .map(b => b.parentElement.textContent.trim())
+        .join(', ');
+    } else {
+      value = group.querySelector('input, select, textarea').value.trim();
+    }
+
+    if (required.includes(label) && !value) missing.push(label);
+    data.append(label === 'Email address' ? 'email' : label, value || '(not provided)');
+  });
+
+  if (missing.length) {
+    alert('Please fill in: ' + missing.join(', '));
+    return;
+  }
+
+  data.append('_subject', 'New Apex Academic student intake');
+
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
   fetch('https://formspree.io/f/mlgvlglb', {
     method: 'POST',
     body: data,
     headers: { 'Accept': 'application/json' }
   }).then(response => {
     if (response.ok) {
-      document.getElementById('formSuccess').style.display = 'block';
-      document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth' });
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.type === 'checkbox') el.checked = false;
+        else el.value = '';
+      });
+      btn.textContent = 'Submitted ✓';
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      alert('Something went wrong. Please email us directly at khalilisti7@gmail.com');
     }
-  }).catch(error => {
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = originalText;
     alert('Something went wrong. Please email us directly at khalilisti7@gmail.com');
   });
 }
