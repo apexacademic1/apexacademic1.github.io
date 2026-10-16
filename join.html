@@ -1,244 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Join Our Team | Apex Academic</title>
-  <meta name="description" content="Tutor with Apex Academic. Help students in grades 7-12 build confidence and reach their goals.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --navy: #0f1b3d;
-      --gold: #c9a227;
-      --cream: #faf7ef;
-      --text: #2b3350;
-      --muted: #5f6783;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      color: var(--text);
-      background: #fff;
-      line-height: 1.65;
-    }
-    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--navy); line-height: 1.2; }
-    a { color: inherit; }
-
-    /* Header */
-    .site-header {
-      background: #fff;
-      border-bottom: 1px solid #ece8da;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .brand {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy);
-      text-decoration: none;
-    }
-    .brand span { color: var(--gold); }
-    .back-link { font-size: 0.95rem; color: var(--muted); text-decoration: none; }
-    .back-link:hover { color: var(--navy); text-decoration: underline; }
-
-    /* Hero */
-    .hero {
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-      padding: 4.5rem 1.5rem;
-    }
-    .hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 1rem; }
-    .hero h1 span { color: var(--gold); }
-    .hero p { max-width: 640px; margin: 0 auto 2rem; font-size: 1.15rem; color: #dfe3f0; }
-
-    .btn {
-      display: inline-block;
-      padding: 1rem 2.4rem;
-      background: var(--gold);
-      color: var(--navy);
-      font-weight: 600;
-      font-size: 1.05rem;
-      text-decoration: none;
-      border-radius: 999px;
-      border: 2px solid var(--gold);
-      transition: transform 0.15s, background 0.15s, color 0.15s;
-    }
-    .btn:hover, .btn:focus { transform: translateY(-2px); background: #fff; color: var(--navy); }
-    .hero .sub { margin-top: 1rem; font-size: 0.9rem; color: #b9c0d9; }
-
-    /* Sections */
-    section { padding: 4rem 1.5rem; }
-    .wrap { max-width: 960px; margin: 0 auto; }
-    .center { text-align: center; }
-    h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); margin: 0 0 1rem; }
-    .lead { max-width: 640px; margin: 0 auto 2.5rem; color: var(--muted); }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
-    .card {
-      background: #fff;
-      border: 1px solid #ece8da;
-      border-top: 4px solid var(--gold);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 14px rgba(15, 27, 61, 0.05);
-    }
-    .card h3 { margin: 0 0 0.5rem; font-size: 1.2rem; }
-    .card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
-
-    .alt { background: var(--cream); }
-
-    .steps { counter-reset: step; display: grid; gap: 1rem; max-width: 640px; margin: 0 auto; padding: 0; list-style: none; text-align: left; }
-    .steps li {
-      counter-increment: step;
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.1rem 1.25rem 1.1rem 4rem;
-      position: relative;
-      box-shadow: 0 2px 10px rgba(15, 27, 61, 0.06);
-    }
-    .steps li::before {
-      content: counter(step);
-      position: absolute;
-      left: 1.1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 50%;
-      background: var(--navy);
-      color: var(--gold);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .needs { list-style: none; padding: 0; margin: 0 auto 2rem; max-width: 520px; text-align: left; }
-    .needs li { padding: 0.5rem 0 0.5rem 2rem; position: relative; }
-    .needs li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
-
-    .cta-box {
-      background: var(--navy);
-      color: #fff;
-      border-radius: 18px;
-      padding: 3rem 1.5rem;
-      text-align: center;
-    }
-    .cta-box h2 { color: #fff; }
-    .cta-box p { color: #dfe3f0; max-width: 520px; margin: 0 auto 1.75rem; }
-
-    details {
-      background: #fff;
-      border: 1px solid #ece8da;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-    summary { cursor: pointer; font-weight: 600; color: var(--navy); }
-    details p { margin: 0.75rem 0 0; color: var(--muted); }
-
-    footer { text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; color: var(--muted); border-top: 1px solid #ece8da; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Become a Tutor | Apex Academic</title>
+<meta name="description" content="Tutor with Apex Academic. Teach students in grades 7-12 online and build real teaching experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#f8f6f1;color:#1c1c2e;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+:root{--navy:#0f2240;--navy2:#1a3560;--navy3:#09182e;--gold:#b8934a;--gold-lt:#e8d5a3;--gold-bg:#fdf6e9;--gold-bdr:#e6d4a0;--cream:#f8f6f1;--white:#fff;--muted:#636578;--border:#e4e0d8}
+.container{max-width:1080px;margin:0 auto;padding:0 40px}
+.tag-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.tag-label.light{color:var(--gold-lt)}
+.section{padding:68px 0}
+.section.white{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:34px;line-height:1.18;color:var(--navy);margin-bottom:13px}
+.section-sub{color:var(--muted);font-size:15px;line-height:1.75;max-width:520px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:13px 24px;border-radius:7px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .18s ease;white-space:nowrap}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#a37c3c;transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,147,74,.35)}
+.btn-lg{padding:15px 30px;font-size:15px}
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;box-shadow:0 1px 12px rgba(0,0,0,.05)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+.nav-links a.active{color:var(--navy);font-weight:600}
+.hero{background:var(--navy);padding:80px 0 72px;position:relative;overflow:hidden}
+.hero-ring{position:absolute;top:-90px;right:-120px;width:420px;height:420px;border-radius:50%;border:52px solid rgba(184,147,74,.09);pointer-events:none}
+.hero-eyebrow{display:inline-block;background:rgba(184,147,74,.2);color:var(--gold-lt);font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:48px;line-height:1.12;color:#fff;max-width:600px;margin-bottom:20px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.7);font-size:16px;line-height:1.78;max-width:500px;margin-bottom:34px}
+.hero-note{font-size:12px;color:rgba(255,255,255,.45);margin-top:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:28px 24px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 2px 16px rgba(15,34,64,.08)}
+.card h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.card p{font-size:13px;color:var(--muted);line-height:1.7}
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:36px;max-width:720px}
+.step{display:flex;align-items:flex-start;gap:14px;background:var(--gold-bg);border:1px solid var(--gold-bdr);border-radius:10px;padding:16px 18px}
+.step-num{width:26px;height:26px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+.step h4{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.step p{font-size:12px;color:var(--muted);line-height:1.6}
+.need-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+.need{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;font-size:14px;color:var(--navy);font-weight:500}
+.need span{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:3px}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px}
+.faq-item h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.faq-item p{font-size:13px;color:var(--muted);line-height:1.65}
+.final-cta{background:var(--navy);padding:80px 0;text-align:center}
+.final-cta h2{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:14px}
+.final-cta p{color:rgba(255,255,255,.62);font-size:15px;max-width:460px;margin:0 auto 30px}
+.final-cta-note{font-size:12px;color:rgba(255,255,255,.4);margin-top:16px}
+footer{background:var(--navy3);padding:28px 0;text-align:center}
+footer p{font-size:12px;color:rgba(255,255,255,.35)}
+footer a{color:rgba(255,255,255,.55)}
+footer a:hover{color:#fff}
+@media(max-width:860px){
+  .nav-links a.hide-m{display:none}
+  .hero h1{font-size:34px}
+  .cards,.need-grid,.faq-grid{grid-template-columns:1fr}
+  .container{padding:0 20px}
+  .section{padding:48px 0}
+  .final-cta h2{font-size:30px}
+}
+</style>
 </head>
 <body>
 
-  <header class="site-header">
-    <a class="brand" href="/">Apex <span>Academic</span></a>
-    <a class="back-link" href="/">← Back to main site</a>
-  </header>
-
-  <div class="hero">
-    <h1>Teach. Inspire. <span>Make an impact.</span></h1>
-    <p>Join Apex Academic and help students in grades 7-12 build confidence, strengthen their skills, and reach their goals.</p>
-    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfG4-GGZZ51shohnfRLpfEz_zIkAC1tn9whf6BDU6mzYJpA6w/viewform" target="_blank" rel="noopener noreferrer">Apply to Tutor</a>
-    <div class="sub">Takes about 5 minutes</div>
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">Apex <span>Academic</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="hide-m">Home</a>
+      <a href="join.html" class="active hide-m">Tutor With Us</a>
+      <a href="index.html">← Back to main site</a>
+    </div>
   </div>
+</nav>
 
-  <section>
-    <div class="wrap center">
-      <h2>Why tutor with Apex Academic?</h2>
-      <p class="lead">We're a student-founded team that cares about real progress, not just homework answers.</p>
-      <div class="cards">
-        <div class="card">
-          <h3>Make a difference</h3>
-          <p>Help middle and high school students understand tough material and feel capable in the classroom.</p>
-        </div>
-        <div class="card">
-          <h3>Teach online</h3>
-          <p>All sessions are held by video, so you can tutor from wherever you are.</p>
-        </div>
-        <div class="card">
-          <h3>Grow your skills</h3>
-          <p>Build teaching, communication, and leadership experience that stands out on any resume or application.</p>
-        </div>
-      </div>
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="container">
+    <div class="hero-eyebrow">Now Recruiting · Online Tutors · Grades 7–12</div>
+    <h1>Teach students who are ready to <em>grow</em></h1>
+    <p class="hero-sub">Join a managed tutoring team that handles the matching, scheduling and parent communication, so you can focus on teaching.</p>
+    <a class="btn btn-gold btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSfG4-GGZZ51shohnfRLpfEz_zIkAC1tn9whf6BDU6mzYJpA6w/viewform" target="_blank" rel="noopener noreferrer">Apply to Tutor</a>
+    <p class="hero-note">Takes about 5 minutes · Google sign-in required to upload documents</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="tag-label">Why Apex</span>
+    <h2 class="section-title">Tutor without the logistics</h2>
+    <p class="section-sub">You teach. We do the rest.</p>
+    <div class="cards">
+      <div class="card"><h3>We match you with students</h3><p>No hunting for clients. We match you to students based on your subjects, grade levels and availability.</p></div>
+      <div class="card"><h3>Teach 100% online</h3><p>Every session is held by video, so you can tutor from campus, home or anywhere with a good connection.</p></div>
+      <div class="card"><h3>Build real experience</h3><p>Develop teaching, communication and leadership skills that stand out on med school, grad school and job applications.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="alt">
-    <div class="wrap center">
-      <h2>How it works</h2>
-      <p class="lead">Applying is simple.</p>
-      <ol class="steps">
-        <li><strong>Fill out the application.</strong> Tell us about your background and the subjects you teach best.</li>
-        <li><strong>Upload your documents.</strong> Add a transcript screenshot and your resume.</li>
-        <li><strong>We review and reach out.</strong> If it looks like a good fit, we'll contact you about next steps.</li>
-      </ol>
+<section class="section white">
+  <div class="container">
+    <span class="tag-label">The Process</span>
+    <h2 class="section-title">Four steps to join the roster</h2>
+    <p class="section-sub">We hold a high bar so families can trust every tutor on our team.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><h4>Apply and upload your documents</h4><p>Tell us about your background and subjects, and upload your resume and a transcript screenshot.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>30-minute video interview</h4><p>We talk about your teaching style, reliability and readiness for online instruction.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Live 15-minute sample lesson</h4><p>Teach a real concept to an evaluator so we can see how you explain and handle confusion.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div><h4>Reference check and background verification</h4><p>Completed before you're matched with any student.</p></div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="wrap center">
-      <h2>What you'll need</h2>
-      <p class="lead">Tutors must have a <strong>3.5+ cumulative GPA</strong>. Have these ready before you start:</p>
-      <ul class="needs">
-        <li>A screenshot of your unofficial transcript showing your cumulative GPA</li>
-        <li>Your resume (PDF or Word)</li>
-        <li>The subjects and grade levels you're comfortable teaching</li>
-        <li>Your general weekly availability</li>
-      </ul>
-      <div class="cta-box">
-        <h2>Ready to get started?</h2>
-        <p>Join a team of tutors helping students succeed.</p>
-        <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfG4-GGZZ51shohnfRLpfEz_zIkAC1tn9whf6BDU6mzYJpA6w/viewform" target="_blank" rel="noopener noreferrer">Start Your Application</a>
-      </div>
+<section class="section">
+  <div class="container">
+    <span class="tag-label">Requirements</span>
+    <h2 class="section-title">What you'll need to apply</h2>
+    <p class="section-sub">Tutors must have a <strong>3.5+ GPA</strong>. Have these ready before you start.</p>
+    <div class="need-grid">
+      <div class="need">Unofficial transcript screenshot<span>Must show your GPA</span></div>
+      <div class="need">Your resume<span>PDF or Word</span></div>
+      <div class="need">Subjects and grade levels<span>What you can teach confidently</span></div>
+      <div class="need">Weekly availability<span>Days and times with your time zone</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="alt">
-    <div class="wrap" style="max-width:700px;">
-      <h2 class="center">Common questions</h2>
-      <details>
-        <summary>Why do I need to upload a transcript?</summary>
-        <p>We use it only to confirm the 3.5+ GPA requirement. An unofficial transcript screenshot is fine.</p>
-      </details>
-      <details>
-        <summary>Why do I have to sign in with Google?</summary>
-        <p>Our application uses Google Forms, which requires a Google sign-in to upload files. Your documents are used only to verify eligibility.</p>
-      </details>
-      <details>
-        <summary>Which subjects can I apply to teach?</summary>
-        <p>We tutor a range of subjects for grades 7-12, including math, science, English, history, and test prep. The form lets you pick every subject you're strong in.</p>
-      </details>
-      <details>
-        <summary>What happens after I apply?</summary>
-        <p>We review every application and email you if it looks like a good match.</p>
-      </details>
+<section class="section white">
+  <div class="container">
+    <span class="tag-label">FAQs</span>
+    <h2 class="section-title">Questions from applicants</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><h4>Why do you need my transcript?</h4><p>We use it only to confirm our GPA requirement. An unofficial screenshot is fine.</p></div>
+      <div class="faq-item"><h4>Why do I have to sign in with Google?</h4><p>Our application is a Google Form, which requires sign-in to upload files. Your documents are used only to verify eligibility.</p></div>
+      <div class="faq-item"><h4>Which subjects can I teach?</h4><p>We cover math, science, English, SAT/ACT prep and homework help for grades 7–12. Select every subject you're strong in.</p></div>
+      <div class="faq-item"><h4>What happens after I apply?</h4><p>We review every application and email you about an interview if it looks like a good fit.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    © Apex Academic · <a href="/">apexacademic.net</a>
-  </footer>
+<section class="final-cta">
+  <div class="container">
+    <span class="tag-label light" style="margin-bottom:14px">Join the team</span>
+    <h2>Ready to start tutoring?</h2>
+    <p>Apply in about 5 minutes. We'll be in touch if it's a great match.</p>
+    <a class="btn btn-gold btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSfG4-GGZZ51shohnfRLpfEz_zIkAC1tn9whf6BDU6mzYJpA6w/viewform" target="_blank" rel="noopener noreferrer">Start Your Application</a>
+    <p class="final-cta-note">Questions? Email khalilisti7@gmail.com</p>
+  </div>
+</section>
+
+<footer>
+  <p>© Apex Academic LLC · Online tutoring for grades 7–12 · <a href="index.html">Back to main site</a></p>
+</footer>
 
 </body>
 </html>
