@@ -775,7 +775,7 @@ footer{background:var(--navy3);padding:36px 0 28px}
               <div class="trust-list-item"><i class="ti ti-check"></i>Session notes after every lesson</div>
             </div>
           </div>
-          <div class="contact-info-card" style="background:var(--gold-bg);border-color:var(--gold-bdr)"><i class="ti ti-gift"></i><h4>Current offer</h4><p>First session free with any 4-session package. Mention this when we call.</p></div>
+          <div class="contact-info-card" style="background:var(--gold-bg);border-color:var(--gold-bdr)"><i class="ti ti-gift"></i><h4>Current offer</h4><p>First session free with any 4-, 8- or 12-session package. Mention this when we call.</p></div>
         </div>
       </div>
     </div>
@@ -813,11 +813,11 @@ footer{background:var(--navy3);padding:36px 0 28px}
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">2025 Apex Academic LLC · Online tutoring for grades 7–12 · U.S.-Wide</div>
+      <div class="footer-copy">© 2026 Apex Academic LLC · Online tutoring for grades 7–12 · U.S.-Wide</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
-        <a href="#">Cancellation Policy</a>
+        <a href="#" onclick="showPage('pricing')">Cancellation Policy</a>
       </div>
     </div>
   </div>
@@ -896,6 +896,11 @@ function submitForm() {
     alert('Something went wrong. Please email us directly at khalilisti7@gmail.com');
   });
 }
+  document.querySelectorAll('.form-group').forEach((g, i) => {
+  const label = g.querySelector('label');
+  const field = g.querySelector('input:not([type=checkbox]), select, textarea');
+  if (label && field) { field.id = 'f' + i; label.htmlFor = field.id; }
+});
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
