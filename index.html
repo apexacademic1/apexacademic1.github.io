@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apex Academic | Online Tutoring for Grades 7–12</title>
 <meta name="description" content="Apex Academic connects students in grades 7–12 with screened tutors for personalized online instruction in math, science, English, and test prep.">
@@ -50,6 +53,7 @@ button{font-family:inherit;cursor:pointer}
 .nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy)}
 .nav-logo span{color:var(--gold)}
+.nav-logo-img{height:40px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .15s}
 .nav-links a:hover{color:var(--navy)}
@@ -255,7 +259,7 @@ footer{background:var(--navy3);padding:36px 0 28px}
 
 <nav class="nav">
   <div class="container">
-    <a href="#" class="nav-logo" onclick="showPage('home')">Apex <span>Academic</span></a>
+    <a href="#" class="nav-logo" onclick="showPage('home')" aria-label="Apex Academic home"><img src="logo.png" alt="Apex Academic" class="nav-logo-img"></a>
     <div class="nav-links">
       <a href="#" onclick="showPage('home')">Home</a>
       <a href="#" onclick="showPage('subjects')">Subjects</a>
